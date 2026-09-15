@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="Lmp8wGWu1cLHdWIG9Ef6ULoXT9YKVXoJW95Hb2TYQWU" />
+<title>Love Tool - Free Online Tools</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#fff0f5}
+header{background:#e84393;color:white;padding:18px;text-align:center;font-size:28px;font-weight:bold; animation: heartbeat 1.5s infinite;}
+@keyframes heartbeat{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
+nav{display:flex;gap:10px;padding:15px;justify-content:center;flex-wrap:wrap;background:white;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+nav button{padding:10px 18px;border:0;background:#ffe6f0;border-radius:20px;cursor:pointer;transition:0.3s}
+nav button:hover{transform:scale(1.1);background:#e84393;color:white}
+nav button.active{background:#e84393;color:white}
+.container{max-width:900px;margin:20px auto;padding:15px; min-height:60vh;}
+.tool-box{display:none;background:white;padding:25px;border-radius:15px;box-shadow:0 4px 15px rgba(0,0,0,0.08); animation: slideUp 0.5s ease;}
+.tool-box.active{display:block}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+input,textarea{width:100%;padding:12px;margin-top:10px;border:1px solid #ddd;border-radius:8px}
+.btn{margin-top:10px;background:#e84393;color:white;border:0;padding:12px 20px;border-radius:8px;width:100%;cursor:pointer;font-size:16px}
+.btn-clear{background:#555;}
+.result{margin-top:15px;background:#f8f9fa;padding:15px;border-radius:10px}
+.animals{display:flex;justify-content:center;gap:15px;font-size:40px;margin:15px 0;animation: float 3s infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+/* Footer Style */
+footer{background:#2d2d2d;color:white;padding:30px 15px;margin-top:40px;text-align:center}
+footer a{color:#ffb3d6;text-decoration:none;margin:0 10px;cursor:pointer}
+footer a:hover{text-decoration:underline}
+.page-content{text-align:left;line-height:1.6}
+</style>
+</head>
+<body>
+<header style="background:#e84393;color:white;padding:18px;text-align:center">
+<div style="font-size:28px;font-weight:bold;">❤️ LOVE TOOL ❤️</div>
+
+<input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="🔍 Search Tool..." style="margin-top:12px; width:90%; max-width:400px; padding:10px 15px; border-radius:20px; border:0; outline:none; color:black;">
+
+</header>
+<nav>
+<button onclick="showTool('home')" class="active" id="b-home">Home</button>
+<button onclick="showTool('t1')" id="b-t1">Text to PDF</button>
+<button onclick="showTool('t2')" id="b-t2">QR Generator</button>
+<button onclick="showTool('t3')" id="b-t3">Word Counter</button>
+<button onclick="showTool('t4')" id="b-t4">Image Resize</button>
+<button onclick="showTool('t5')" id="b-t5">Age Calculator</button>
+<a href="lovecalculatorpro.html"><button style="background:linear-gradient(90deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:16px;font-weight:bold;cursor:pointer;">❤️ Love Calculator Pro</button></a>
+<a href="Emicalculator.html"><button style="background:linear-gradient(90deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:16px;font-weight:bold;cursor:pointer;"> Emi Calculator </button></a>
+<a href="EnglishHindiwriting.html"><button style="background:linear-gradient(90deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:16px;font-weight:bold;cursor:pointer;"> English Hindi Writing</button></a>
+<a href="Instabiogenerator.html"><button style="background:linear-gradient(90deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:16px;font-weight:bold;cursor:pointer;"> Insta Bio Generator</button></a>
+<a href="insta-caption-hashtag-generator.html"><button style="background:linear-gradient(90deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:16px;font-weight:bold;cursor:pointer;"> Insta Caption & Hashtag Generator</button></a>
+<a href="Jobresumemaker.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:25px;font-size:16px;font-weight:bold;cursor:pointer;"> Job Resume Maker</button></a>
+<a href="FINALWITHROYAL.html"><button style="background:linear-gradient(90deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:16px;font-weight:bold;cursor:pointer;"> Wedding Biodata Maker</button></a>
+<a href="invoicemaker.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:25px;font-size:16px;font-weight:bold;cursor:pointer;"> Invoice Maker</button></a>
+<a href="Salary-calculator.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;">Salary-calculator</button></a>
+<a href="Unit-converter.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;">Unit-converter</button></a>
+<a href="Construction-calculator.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;">Construction-calculator</button></a>
+<a href="Pdf-toolkit.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;">PDF Toolkit</button></a>
+<a href="Animatedbanner.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;">Animated Banner</button></a>
+<a href="Jokegenerator.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;">Joke Generator</button></a>
+<a href="PasswordGenerator.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;">Password Generator</button></a>
+<a href="Weathernews.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;">Weather News</button></a>
+<a href="LogoBannerGenerator.html"><button style="background:linear-gradient(80deg,#ff416c,#ff4b2b);color:#fff;border:none;padding:14px 28px;border-radius:30px;font-size:14px;font-weight:bold;cursor:pointer;">Logo Banner Generator</button></a>
+</nav>
+
+<div class="container">
+<div id="home" class="tool-box active">
+<div class="animals">🐶 🐱 🐼 🦊 🐰</div>
+<h2>Welcome to Love Tool ❤️</h2>
+<p style="margin-top:10px">Fast, Free & Easy Tools with NO Login, NO waterMarks.</p>
+<p style="margin-top:10px">🐾 Animals bhi aapka swagat kar rahe hain!</p>
+</div>
+
+<div id="t1" class="tool-box"><h3>1. Text to PDF</h3><textarea id="myText" rows="8" placeholder="Yaha text likho..."></textarea><button class="btn" onclick="makePDF()">PDF Download</button><button class="btn btn-clear" onclick="document.getElementById('myText').value=''">Clear</button></div>
+<div id="t2" class="tool-box"><h3>2. QR Generator</h3><input type="text" id="qrText" placeholder="Link likho"><button class="btn" onclick="makeQR()">Generate</button><button class="btn btn-clear" onclick="clearQR()">Clear</button><div id="qrResult" style="text-align:center;margin-top:15px"></div></div>
+<div id="t3" class="tool-box"><h3>3. Word Counter</h3><textarea id="textIn" rows="6"></textarea><div class="result">Words: <b id="wCount">0</b> | Characters: <b id="cCount">0</b></div><button class="btn btn-clear" onclick="clearWord()">Clear</button></div>
+<div id="t4" class="tool-box"><h3>4. Image Resize</h3><input type="file" id="imgIn" accept="image/*"><input type="number" id="wInput" placeholder="Width"><input type="number" id="hInput" placeholder="Height"><button class="btn" onclick="resizeImg()">Resize & Download</button><button class="btn btn-clear" onclick="clearImg()">Clear</button><div id="imgResult" style="text-align:center;margin-top:15px"></div></div>
+<div id="t5" class="tool-box"><h3>5. Age Calculator</h3><input type="date" id="dob"><button class="btn" onclick="calcAge()">Calculate</button><button class="btn btn-clear" onclick="document.getElementById('dob').value='';document.getElementById('ageResult').innerText=''">Clear</button><div class="result" id="ageResult"></div></div>
+
+<div id="about" class="tool-box"><h3>About Us</h3><div class="page-content"><p>Love Tool ek free website hai jaha aapko 5 useful tools milte hain. Hamara maksad hai aapka kaam easy karna. Ye website Seoni, MP se chalayi ja rahi hai.</p></div></div>
+<div id="contact" class="tool-box"><h3>Contact Us</h3><div class="<div id="contact" style="max-width:500px;margin:40px auto;background:white;padding:20px;border-radius:15px;">
+<h2>Contact Us 💌</h2>
+<p>Koi bhi sawal ho to message bhejo — 24hr me reply karenge.</p>
+
+<form name="contact" method="POST" data-netlify="true">
+<input type="hidden" name="form-name" value="contact">
+<input type="text" name="name" placeholder="Your Name" required style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:1px solid #ccc">
+<input type="email" name="email" placeholder="Your Email" required style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:1px solid #ccc">
+<textarea name="message" placeholder="Your Message" required style="width:100%;padding:10px;margin:5px 0;border-radius:8px;border:1px solid #ccc"></textarea>
+<button type="submit" style="background:#ff2a6d;color:white;padding:10px;width:100%;border:none;border-radius:8px;">Send Message</button>
+</form>
+<p>Location: seoni, Madhya Pradesh, India</p><p>Agar koi problem ho to hume email kare.</p></div></div>
+<div id="privacy" class="tool-box"><h3>Privacy Policy</h3><div class="page-content"><p>1. Hum aapka koi bhi data save nahi karte.</p><p>2. Aap jo image/text daalte ho wo aapke browser me hi rehta hai, server pe nahi jata.</p><p>3. Hum Google AdSense ka use karte hain jo cookies use kar sakta hai.</p><p>4. Aapki privacy hamare liye important hai.</p></div></div>
+<div id="terms" class="tool-box"><h3>Terms & Conditions</h3><div class="page-content"><p>Is website ke tools free hain. Inka galat use na kare. Hum kisi bhi nuksan ke zimmedar nahi hain.</p></div></div>
+<div id="disclaimer" class="tool-box"><h3>Disclaimer</h3><div class="page-content"><p>Ye tools best effort pe banaye gaye hain. 100% accuracy ki guarantee nahi hai.</p></div></div>
+</div>
+
+<footer>0
+<p><a href="About.html">About Us</a> | <a onclick="showTool('contact')">Contact Us</a> | <a href="Privacy.html">Privacy Policy</a> | <a href="Terms-Condition.html">Terms</a> | <a href="Disclaimer.html">Disclaimer</a></p>
+<p style="margin-top:15px;font-size:14px;">© 2026 Love Tool - Made with ❤️ in Seoni, MP All Right Reserved.</p>
+<p style="margin-top:10px;">🐶 🐱 🐼 🦊 🐰</p>
+</footer>
+
+<script>
+function searchFunction() {
+  let input = document.getElementById('searchInput').value.toLowerCase();
+  let buttons = document.querySelectorAll('nav button');
+  buttons.forEach(btn => {
+    let text = btn.innerText.toLowerCase();
+    if (text.includes(input)) {
+      btn.style.display = "";
+    } else {
+      btn.style.display = "none";
+    }
+  });
+}
+function showTool(id){document.querySelectorAll('.tool-box').forEach(e=>e.classList.remove('active'));document.querySelectorAll('nav button').forEach(e=>e.classList.remove('active'));document.getElementById(id).classList.add('active');let b=document.getElementById('b-'+id);if(b) b.classList.add('active');window.scrollTo(0,0);}
+function makePDF(){const { jsPDF } = window.jspdf; let ta=document.getElementById("myText"); if(ta.value.trim()==="") return alert("Text likho"); let doc=new jsPDF(); let lines=doc.splitTextToSize(ta.value,180); doc.text(lines,15,20); doc.save("LoveTool.pdf"); ta.value="";}
+function makeQR(){let v=document.getElementById('qrText').value; if(!v) return alert("Kuch likho"); document.getElementById('qrResult').innerHTML=`<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(v)}">`; document.getElementById('qrText').value="";}
+function clearQR(){document.getElementById('qrText').value="";document.getElementById('qrResult').innerHTML="";}
+document.getElementById('textIn')?.addEventListener('input', function(){let t=this.value.trim();document.getElementById('wCount').innerText=t? t.split(/\s+/).length:0;document.getElementById('cCount').innerText=this.value.length;});
+function clearWord(){document.getElementById('textIn').value="";document.getElementById('wCount').innerText="0";document.getElementById('cCount').innerText="0";}
+let loadedImg=null; document.getElementById('imgIn')?.addEventListener('change', e=>{document.getElementById('imgResult').innerHTML="";let f=e.target.files[0];loadedImg=new Image();loadedImg.src=URL.createObjectURL(f);loadedImg.onload=()=>{document.getElementById('imgResult').innerHTML=`<p>${loadedImg.width}x${loadedImg.height}</p><img src="${loadedImg.src}" style="max-width:100%;margin-top:10px">`;}});
+function resizeImg(){if(!loadedImg) return alert("Image select karo"); let w=parseInt(document.getElementById('wInput').value); let h=parseInt(document.getElementById('hInput').value); if(!w||!h) return alert("Width/Height likho"); let c=document.createElement('canvas'); c.width=w;c.height=h; c.getContext('2d').drawImage(loadedImg,0,0,w,h); let l=document.createElement('a'); l.download='love-tool-resized.png'; l.href=c.toDataURL(); l.click(); clearImg();}
+function clearImg(){document.getElementById('imgIn').value="";document.getElementById('wInput').value="";document.getElementById('hInput').value="";document.getElementById('imgResult').innerHTML="";loadedImg=null;}
+function calcAge(){document.getElementById('ageResult').innerText=""; let dob=new Date(document.getElementById('dob').value); if(!dob.getTime()) return alert("Date select karo"); let age=new Date(Date.now()-dob.getTime()).getUTCFullYear()-1970; document.getElementById('ageResult').innerText=`Age: ${age} Saal`;}
+</script>
+</body>
+</html>

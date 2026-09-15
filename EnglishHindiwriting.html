@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English to Hindi Writing Tool PRO - Khategaon MP Online</title>
+<meta name="description" content="Khategaon ka No.1 English Hindi Writing Tool. English to Hindi Translation, Hindi Only PDF, English Only PDF, Both PDF.">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box} body{margin:0; background:#f5f7fb; font-family:'Noto Sans Devanagari', system-ui; padding:12px; color:#111}
+.main{max-width:800px; margin:auto; background:#fff; border-radius:20px; padding:18px; box-shadow:0 15px 40px rgba(0,0,0,.1)}
+h2{text-align:center; margin:0}.sub{text-align:center; color:#777; font-size:13px; margin-bottom:15px}
+.tabs{display:flex; background:#f1f5f9; padding:5px; border-radius:12px; gap:5px; margin-bottom:15px}
+.tabs button{flex:1; padding:11px; border:none; border-radius:9px; font-weight:700; cursor:pointer; background:transparent}
+.tabs button.active{background:#111; color:#fff}
+.boxes{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+textarea{width:100%; height:300px; padding:14px; border:2px solid #e5e7eb; border-radius:14px; font-size:18px; outline:none; resize:none; line-height:1.6; font-family:'Noto Sans Devanagari', system-ui}
+.actions{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:15px}
+.actions button{padding:12px; border:none; border-radius:12px; font-weight:800; cursor:pointer}
+.pdf-box{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-top:12px; background:#f8fafc; padding:12px; border-radius:14px; border:1px dashed #94a3b8}
+.pdf-box b{grid-column:1/-1; font-size:13px; text-align:center; color:#334155}
+.c1{background:#111; color:#fff}.c2{background:#fee2e2; color:#991b1b}.c3{background:#dbeafe; color:#1e40af}.c4{background:#dcfce7; color:#14532d}.c5{background:#fef9c3; color:#854d0e}
+.foot{display:flex; justify-content:space-between; margin-top:10px; font-size:12px; color:#666}
+.article{max-width:800px; margin:25px auto; background:#fff; border-radius:16px; padding:22px; line-height:1.9; color:#222}
+.article h2{text-align:left; font-size:22px} .article h3{font-size:18px; margin-top:20px}
+@media(max-width:700px){.boxes,.actions,.pdf-box{grid-template-columns:1fr} textarea{height:170px}}
+</style>
+</head>
+<body>
+
+<div class="main">
+<h2>✍️PRO Writing Tool</h2>
+<div class="sub">English + Hindi + Translation </div>
+
+<div class="tabs">
+<button id="t1" class="active" onclick="setTab(1)">English Writing</button>
+<button id="t2" onclick="setTab(2)">Hindi Writing</button>
+<button id="t3" onclick="setTab(3)">Translation</button>
+</div>
+
+<div class="boxes">
+<div><label>ENGLISH BOX</label><textarea id="box1" placeholder="English me likho... I am Akash from Khategaon"></textarea></div>
+<div><label>HINDI BOX</label><textarea id="box2" placeholder="Yaha Hindi me ayega..."></textarea></div>
+</div>
+
+<div class="actions">
+<button class="c3" onclick="convert()">🔄 Convert</button>
+<button class="c1" onclick="copyBox2()">📋 Copy</button>
+<button class="c2" onclick="clearAll()">🧹 Clear</button>
+</div>
+
+<div class="pdf-box">
+<b>📄 PDF Kaise Chahiye? Select Karo</b>
+<button class="c4" onclick="makePDF('hindi')">Hindi Only PDF</button>
+<button class="c5" onclick="makePDF('english')">English Only PDF</button>
+<button class="c1" onclick="makePDF('both')">Both PDF</button>
+</div>
+
+<div class="foot"><span id="wc">Words: 0</span><span>Auto Save ON ✓</span><span id="cc">Chars: 0</span></div>
+</div>
+
+<div class="article">
+<h2>English to Hindi Writing Tool </h2>
+<p>Dosto agar aap bhi <strong>English se Hindi me likhna</strong> chahte ho to ye tool sirf aapke liye hai.Maine dekha ki MP Online, Loan, aur Sarkari form ke liye logo ko Hindi aur English me application likhne me bahut dikkat hoti hai, isliye maine ye <strong>3-in-1 Writing Tool</strong> banaya hai.</p>
+
+<h3>Is Tool Me Kya-Kya Milega?</h3>
+<p><strong>1. English Writing:</strong> Aap English me direct type kar sakte ho aur uska PDF bana sakte ho. Jaise Loan application, Chhutti ke liye letter.</p>
+<p><strong>2. Hindi Writing:</strong> Agar aapko Hindi me likhna hai to aap Hinglish me likho jaise <code>mera naam akash hai main khategaon se hu</code> aur ye apne aap <code>मेरा नाम आकाश है मैं खातेगांव से हूँ</code> me badal dega.</p>
+<p><strong>3. English to Hindi Translation:</strong> Ye sabse khaas hai. Aap English me likho jaise "i am salman i live in kahniwada" aur ek click me "मैं सलमान हूं मैं कहनीवाड़ा में रहता हूं" me convert ho jayega.</p>
+
+<h3>Naya Feature - 3 Tarah Ka PDF</h3>
+<p>Pehle PDF me dono language ek sath aate the, ab aap chun sakte ho:</p>
+<ul>
+<li><strong>Hindi Only PDF:</strong> Agar aapko sirf Hindi wala hissa chahiye, jaise application Hindi me dena hai.</li>
+<li><strong>English Only PDF:</strong> Agar aapko sirf English wala hissa chahiye.</li>
+<li><strong>Both PDF:</strong> Agar aapko dono chahiye jaise abhi tere screenshot me aa raha hai, upar English niche Hindi.</li>
+</ul>
+
+<h3>Iske Features Kya Hai?</h3>
+<ul>
+<li><strong>Clear Button:</strong> Ek click me saara text saaf ho jayega, baar-baar manual delete nahi karna padega.</li>
+<li><strong>Copy Button:</strong> Ek click me saara text copy ho jayega.</li>
+<li><strong>PDF Download (Fixed Font):</strong> Ab Hindi font ka bug 100% thik hai. Pehle PDF me kachra aata tha, ab Noto Sans Devanagari font se ekdum sahi Hindi ayega.</li>
+<li><strong>Auto Save:</strong> Agar light chali gayi ya galti se page band ho gaya to aapka likha hua text safe rahega.</li>
+</ul>
+
+<h3>Iska Upyog Kaha-Kaha Hota Hai?</h3>
+<p>Ye tool students aur dukan walo ke liye bahut kaam ka hai. Aap iska upyog MP Online Form, Collector Application, School Application, Loan Application, aur Khasra Khatoni ke liye kar sakte ho.</p>
+<p>Ye tool 100% free hai aur mobile me bhi aasani se chalta hai. Agar aapko ye tool pasand aaya to apne dosto ke saath share jarur karna.</p>
+<p><strong>Keywords:</strong> English to Hindi typing, Hindi writing tool, MP Online Hindi typing, Hindi Only PDF, English Only PDF</p>
+</div>
+
+<script>
+let mode=1; const b1=document.getElementById('box1'), b2=document.getElementById('box2');
+b1.value=localStorage.getItem('akash_b1')||''; b2.value=localStorage.getItem('akash_b2')||'';
+function setTab(n){mode=n; document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active')); document.getElementById('t'+n).classList.add('active');}
+async function convert(){
+let text=b1.value.trim(); if(!text) return alert('Pehle upar wale box me likho!'); b2.value='Translating...';
+try{
+let url=`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${mode==2?'hi|en':'en|hi'}`;
+let r=await fetch(url); let d=await r.json(); let out=d.responseData.translatedText;
+if(mode!=2 && out.toLowerCase()==text.toLowerCase()){
+let r2=await fetch(`https://inputtools.google.com/request?text=${encodeURIComponent(text)}&itc=hi-t-i0-und&num=1`);
+let d2=await r2.json(); if(d2[0]==='SUCCESS') out=d2[1].map(x=>x[1][0]).join(' ');
+}
+b2.value=out; save();
+}catch(e){ b2.value='Error, net check karo'; }
+}
+function copyBox2(){ if(!b2.value) return alert('Copy karne ke liye kuch nahi!'); navigator.clipboard.writeText(b2.value); alert('Copy Ho Gaya ✓'); }
+function clearAll(){ if(confirm('Dono box saaf kar du?')){ b1.value=''; b2.value=''; localStorage.clear(); count(); } }
+function save(){ localStorage.setItem('akash_b1',b1.value); localStorage.setItem('akash_b2',b2.value); count(); }
+function count(){let t=b1.value+b2.value; document.getElementById('wc').innerText='Words: '+(t.trim()?t.trim().split(/\s+/).length:0); document.getElementById('cc').innerText='Chars: '+t.length;}
+function makePDF(type){
+let hindi=b2.value.trim(); let english=b1.value.trim();
+if(!hindi && !english) return alert('Pehle kuch likho!');
+let content=""; if(type==='hindi') content=hindi; else if(type==='english') content=english; else content=english + "\n\n-----------------------------------\n\n" + hindi;
+if((type==='hindi' && !hindi) || (type==='english' && !english)) return alert(type+' box khali hai!');
+let w=window.open('', '_blank');
+w.document.write(`<html><head><title>Akash-${type}</title><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet"><style>body{font-family:'Noto Sans Devanagari', sans-serif; padding:30px; font-size:22px; line-height:1.9; white-space:pre-wrap;}</style></head><body>${content.replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>')}</body></html>`);
+w.document.close(); setTimeout(()=>{ w.print(); }, 500);
+}
+b1.addEventListener('input', ()=>{ save(); count(); }); b2.addEventListener('input', ()=>{ save(); count(); }); count();
+</script>
+</body>
+</html>

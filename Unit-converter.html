@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Converter Pro - Bigha Acre Gaj Sq Ft to Sq Meter | Real Estate Khet Construction</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#fffafc;line-height:1.7}
+.top-nav{background:#fff;padding:12px 3%;box-shadow:0 2px 12px rgba(0,0,0,.06);display:flex;flex-wrap:wrap;gap:8px;justify-content:center;position:sticky;top:0;z-index:999}
+.top-nav a{text-decoration:none;padding:8px 16px;border-radius:30px;font-weight:600;font-size:12px}
+.top-nav a.light{background:#fdf2f8;color:#444;border:1px solid #fce7f3}
+.top-nav a.red{background:linear-gradient(135deg,#fb7185,#f43f5e);color:#fff}
+.article{max-width:1100px;margin:15px auto;background:#fff;padding:24px;border-radius:16px;border-left:8px solid #d97706;border-right:8px solid #059669;box-shadow:0 8px 25px rgba(0,0,0,0.06)}
+.article h1{font-family:'Space Grotesk';font-size:21px;color:#78350f;line-height:1.3}
+.article h2{font-size:12px;color:#fff;background:linear-gradient(90deg,#d97706,#059669);display:inline-block;padding:5px 12px;border-radius:20px;margin:14px 0 8px 0}
+.article p,.article li{font-size:12.5px;color:#333;margin-top:6px}.article ul{margin-left:18px}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;color:#fff;font-size:9px;font-weight:800;margin:3px 3px 0 0}
+.b1{background:#d97706}.b2{background:#059669}.b3{background:#2563eb}.b4{background:#7c3aed}
+.container{max-width:1100px;margin:12px auto;display:grid;grid-template-columns:380px 1fr;gap:12px;padding:0 10px}
+@media(max-width:900px){.container{grid-template-columns:1fr}}
+.left{background:#fff;padding:14px;border-radius:14px;border:2px solid #fde68a;position:sticky;top:80px;height:92vh;overflow-y:auto}
+.left h3{font-size:10.5px;color:#fff;padding:6px 10px;border-radius:8px;margin:10px 0 6px 0}
+.h-area{background:linear-gradient(90deg,#d97706,#f59e0b)}.h-len{background:linear-gradient(90deg,#2563eb,#60a5fa)}.h-note{background:linear-gradient(90deg,#059669,#10b981)}
+input,select{width:100%;padding:9px 10px;margin:2px 0 7px 0;border:2px solid #fde68a;border-radius:10px;font-size:12px;outline:none;font-weight:600}
+input:focus,select:focus{border-color:#d97706}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.btn{padding:10px;border:none;border-radius:10px;font-weight:800;color:#fff;font-size:11px;cursor:pointer}
+.btn-pdf{background:linear-gradient(135deg,#d97706,#f59e0b)}.btn-copy{background:linear-gradient(135deg,#2563eb,#3b82f6)}.btn-print{background:linear-gradient(135deg,#059669,#10b981)}.btn-clear{background:linear-gradient(135deg,#dc2626,#ef4444)}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#78350f;color:#fff;padding:10px 18px;border-radius:30px;display:none;z-index:999;font-weight:800;font-size:11px}
+#previewWrap{padding:14px;background:linear-gradient(135deg,#fef3c7,#d1fae5,#bfdbfe);border-radius:16px;display:flex;justify-content:center}
+#unitCard{width:100%;max-width:750px;background:#fff;border-radius:14px;padding:18px;box-shadow:0 15px 40px rgba(0,0,0,0.12)}
+.head{border-bottom:3px solid #d97706;padding-bottom:10px;display:flex;justify-content:space-between}
+.resultBig{background:linear-gradient(135deg,#fffbeb,#ecfdf5);border:2px dashed #d97706;border-radius:14px;padding:14px;text-align:center;margin-top:12px}
+.resultBig b{font-size:11px;color:#92400e;display:block}.resultBig span{font-size:26px;font-weight:800;color:#78350f;display:block;margin-top:4px}
+.grid6{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.uBox{background:#fff;border:1.5px solid #e5e7eb;border-radius:10px;padding:9px;text-align:center}
+.uBox small{font-size:8.5px;color:#6b7280;display:block;text-transform:uppercase;font-weight:700}
+.uBox big{font-size:13px;font-weight:800;color:#111;display:block;margin-top:2px}
+.table{width:100%;border-collapse:collapse;margin-top:12px;font-size:11px}
+.table th{background:#78350f;color:#fff;padding:6px;text-align:left;font-size:9.5px}
+.table td{padding:7px 8px;border-bottom:1px solid #eee}
+.footer{text-align:center;margin-top:12px;font-size:8px;color:#6b7280;border-top:1px solid #eee;padding-top:6px}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+<a href="index.html" class="light">Home</a>
+<a href="salary-calculator.html" class="red">Salary Calculator</a>
+<a href="unit-converter.html" class="red">🏞️ Unit Converter Pro</a>
+<a href="invoice-maker.html" class="light">Invoice Maker</a>
+</div>
+
+<div class="article">
+<h1>🏞️ All Unit Converter Pro - Bigha, Acre, Gaj, Sq Ft, Marla, Kanal, Hectare, Guntha | Khet & Construction</h1>
+<span class="badge b1">REAL ESTATE: Acre, Gaj, Sq Ft, Sq Mt, Cent</span>
+<span class="badge b2">KHET: Bigha MP UP Rajasthan, Guntha, Hectare</span>
+<span class="badge b3">CONSTRUCTION: Marla, Kanal, Ground, Biswa</span>
+<span class="badge b4">LENGTH: Foot, Meter, Inch, Yard</span>
+
+<h2>1. Zameen Ki Units Kya Hai? Khet Me Kya Use Hota Hai?</h2>
+<p>India me zameen 2 tarah se naapi jati hai. <b>City / Construction me</b> - Sq Ft, Sq Meter, Gaj (Sq Yard), Marla, Kanal. <b>Gaon / Khet me</b> - Bigha, Acre, Hectare, Guntha, Cent. 1 Acre = 43560 Sq Ft = 4046.86 Sq Meter = 4840 Gaj. 1 Hectare = 2.471 Acre = 10000 Sq Meter.</p>
+
+<h2>2. Bigha Ka Chakkar - Sabse Important (State Wise)</h2>
+<ul>
+<li><b>MP / Chhattisgarh Bigha:</b> 1 Bigha = 12000 Sq Ft = 1333.33 Gaj = 0.275 Acre. Jabalpur, Bhopal, Indore me yahi chalta hai.</li>
+<li><b>UP / Delhi Pucca Bigha:</b> 1 Bigha = 27225 Sq Ft = 3025 Gaj = 0.625 Acre = 2529 Sq Meter.</li>
+<li><b>Rajasthan Bigha:</b> 1 Bigha = 27489 Sq Ft = 3054 Gaj. Kuch jagah 17424 Sq Ft bhi mante hai.</li>
+<li><b>1 Guntha = 1089 Sq Ft = 121 Gaj = 1/40 Acre.</b> Maharashtra, Karnataka me use.</li>
+<li><b>1 Cent = 435.6 Sq Ft = 48.4 Gaj = 1/100 Acre.</b> South India me use.</li>
+<li><b>1 Marla = 272.25 Sq Ft = 30.25 Gaj. 1 Kanal = 20 Marla = 5445 Sq Ft.</b> Punjab, Haryana me use.</li>
+</ul>
+
+<h2>3. Kaise Use Kare? Pro Guide</h2>
+<p>Upar Value daalo - jaise 1. Phir <b>From Unit</b> me se Acre select karo, <b>To Unit</b> me Bigha (MP) select karo. Neeche auto saare units me convert hoke table ban jayega. PDF Slip se apne client ko bhej sakte ho.</p>
+</div>
+
+<div class="container">
+<div class="left">
+<h3 class="h-area">🏞️ Area / Zameen Converter</h3>
+<input type="number" id="val" value="1" placeholder="Value daale - jaise 1" oninput="convert()">
+<div class="row2">
+<select id="from" onchange="convert()">
+<option value="sqft">Sq Feet (Sq Ft)</option>
+<option value="sqmt" selected>Sq Meter</option>
+<option value="sqyd">Gaj / Sq Yard</option>
+<option value="acre">Acre</option>
+<option value="hect">Hectare</option>
+<option value="bigha_mp">Bigha MP/CG (12000 SqFt)</option>
+<option value="bigha_up">Bigha UP Pucca (27225 SqFt)</option>
+<option value="bigha_rj">Bigha Rajasthan (27489 SqFt)</option>
+<option value="cent">Cent (435.6 SqFt)</option>
+<option value="guntha">Guntha (1089 SqFt)</option>
+<option value="marla">Marla (272.25 SqFt)</option>
+<option value="kanal">Kanal (5445 SqFt)</option>
+<option value="biswa">Biswa (13500 SqFt UP)</option>
+<option value="ground">Ground (2400 SqFt)</option>
+</select>
+<select id="to" onchange="convert()">
+<option value="sqft">Sq Feet (Sq Ft)</option>
+<option value="sqmt">Sq Meter</option>
+<option value="sqyd">Gaj / Sq Yard</option>
+<option value="acre" selected>Acre</option>
+<option value="hect">Hectare</option>
+<option value="bigha_mp">Bigha MP/CG (12000 SqFt)</option>
+<option value="bigha_up">Bigha UP Pucca (27225 SqFt)</option>
+<option value="bigha_rj">Bigha Rajasthan (27489 SqFt)</option>
+<option value="cent">Cent</option>
+<option value="guntha">Guntha</option>
+<option value="marla">Marla</option>
+<option value="kanal">Kanal</option>
+<option value="biswa">Biswa</option>
+<option value="ground">Ground</option>
+</select>
+</div>
+
+<h3 class="h-len">📏 Length Converter (Construction)</h3>
+<div class="row2">
+<input type="number" id="lenVal" value="1" placeholder="Length" oninput="convertLen()">
+<select id="lenFrom" onchange="convertLen()">
+<option value="ft">Feet</option>
+<option value="mt" selected>Meter</option>
+<option value="inch">Inch</option>
+<option value="yd">Yard/Gaj (Length)</option>
+<option value="km">Kilometer</option>
+</select>
+</div>
+<div class="row2">
+<input type="text" id="lenResult" readonly placeholder="Result" style="background:#f0fdf4">
+<select id="lenTo" onchange="convertLen()">
+<option value="ft" selected>Feet</option>
+<option value="mt">Meter</option>
+<option value="inch">Inch</option>
+<option value="yd">Yard/Gaj (Length)</option>
+<option value="km">Kilometer</option>
+</select>
+</div>
+
+<h3 class="h-note">💡 MP Jabalpur Note</h3>
+<p style="font-size:10px;color:#555;background:#fffbeb;padding:8px;border-radius:8px">Jabalpur me 1 Acre = 3.63 Bigha MP. 1 Bigha MP = 12000 Sq Ft. Registry me Sq Meter likha hota hai, isliye Sq Meter se Bigha nikalna sabse sahi hai.</p>
+
+<div class="btns">
+<button class="btn btn-pdf" onclick="downloadPDF()">⬇️ PDF Slip</button>
+<button class="btn btn-copy" onclick="copyAll()">📋 Copy All</button>
+<button class="btn btn-print" onclick="window.print()">🖨️ Print</button>
+<button class="btn btn-clear" onclick="clearAll()">🗑️ Clear</button>
+</div>
+</div>
+
+<div id="previewWrap">
+<div id="unitCard">
+<div class="head">
+<div><h2 id="rTitle" style="font-family:'Space Grotesk';color:#78350f">1 Sq Meter = 0.000247 Acre</h2><p style="font-size:9px;color:#6b7280" id="rSub">Real Estate & Khet Unit Converter Pro • Jabalpur MP</p></div>
+<div style="text-align:right"><span id="rBadge" style="font-size:9px;background:#fef3c7;padding:4px 10px;border-radius:20px;font-weight:700">LIVE RATE</span></div>
+</div>
+
+<div class="resultBig">
+<b id="rFromLabel">1 SQ METER</b>
+<span id="rMain">0.000247 Acre</span>
+<small style="font-size:9px;color:#6b7280" id="rMain2">= 10.7639 Sq Ft = 1.19599 Gaj</small>
+</div>
+
+<div class="grid6">
+<div class="uBox"><small>Sq Feet</small><big id="u_sqft">0</big></div>
+<div class="uBox"><small>Sq Meter</small><big id="u_sqmt">0</big></div>
+<div class="uBox"><small>Gaj / Sq Yard</small><big id="u_sqyd">0</big></div>
+<div class="uBox"><small>Acre</small><big id="u_acre">0</big></div>
+<div class="uBox"><small>Hectare</small><big id="u_hect">0</big></div>
+<div class="uBox"><small>Bigha MP</small><big id="u_bigha_mp">0</big></div>
+<div class="uBox"><small>Bigha UP Pucca</small><big id="u_bigha_up">0</big></div>
+<div class="uBox"><small>Cent</small><big id="u_cent">0</big></div>
+<div class="uBox"><small>Guntha</small><big id="u_guntha">0</big></div>
+<div class="uBox"><small>Marla</small><big id="u_marla">0</big></div>
+<div class="uBox"><small>Kanal</small><big id="u_kanal">0</big></div>
+<div class="uBox"><small>Ground</small><big id="u_ground">0</big></div>
+</div>
+
+<table class="table">
+<thead><tr><th>Unit Name</th><th>Value</th><th>Use Kahan Hota Hai</th></tr></thead>
+<tbody id="fullTable"></tbody>
+</table>
+
+<div class="footer">1 Acre = 43560 Sq Ft | 1 Hectare = 2.471 Acre | 1 Gaj = 9 Sq Ft | Values are standard estimates, verify with local Patwari.</div>
+</div>
+</div>
+</div>
+<div id="toast"></div>
+
+<script>
+const toSqMt = {
+sqft: 0.092903,
+sqmt: 1,
+sqyd: 0.836127,
+acre: 4046.86,
+hect: 10000,
+bigha_mp: 1114.836, //12000 sqft
+bigha_up: 2529.285, //27225 sqft
+bigha_rj: 2553.71, //27489 sqft
+cent: 40.4686,
+guntha: 101.171,
+marla: 25.2929,
+kanal: 505.857,
+biswa: 1254.0, // approx 13500 sqft / 20 biswa = 675? using 1254 as avg
+ground: 203.0
+};
+const names = {
+sqft:"Sq Feet", sqmt:"Sq Meter", sqyd:"Gaj / Sq Yard", acre:"Acre", hect:"Hectare",
+bigha_mp:"Bigha MP/CG", bigha_up:"Bigha UP Pucca", bigha_rj:"Bigha RJ", cent:"Cent", guntha:"Guntha", marla:"Marla", kanal:"Kanal", biswa:"Biswa", ground:"Ground"
+};
+const uses = {
+sqft:"City Plot, Flat", sqmt:"Registry, Govt", sqyd:"Gaj - North India Plot", acre:"Khet Bada", hect:"Sarkari Hectare", bigha_mp:"MP, CG Khet", bigha_up:"UP, Delhi Khet", bigha_rj:"Rajasthan Khet", cent:"South India", guntha:"Maharashtra", marla:"Punjab Plot", kanal:"Punjab Bada Plot", biswa:"UP Khet", ground:"Chennai Plot"
+};
+function toast(m){const t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500);}
+
+function convert(){
+let v=parseFloat(document.getElementById('val').value)||0;
+let from=document.getElementById('from').value;
+let to=document.getElementById('to').value;
+let sqmt = v * toSqMt[from];
+let result = sqmt / toSqMt[to];
+
+document.getElementById('rTitle').innerText = v+" "+names[from]+" = "+result.toFixed(6)+" "+names[to];
+document.getElementById('rSub').innerText = names[from]+" to All Units Converter";
+document.getElementById('rFromLabel').innerText = v+" "+names[from].toUpperCase();
+document.getElementById('rMain').innerText = result.toFixed(6)+" "+names[to];
+document.getElementById('rMain2').innerText = "= "+(sqmt/0.092903).toFixed(2)+" Sq Ft = "+(sqmt/0.836127).toFixed(2)+" Gaj";
+document.getElementById('rBadge').innerText = from+" → "+to;
+
+for(let k in toSqMt){
+let val = sqmt / toSqMt[k];
+let el=document.getElementById('u_'+k);
+if(el) el.innerText = val.toFixed(4);
+}
+let html="";
+for(let k in toSqMt){
+let val = sqmt / toSqMt[k];
+html+=`<tr><td>${names[k]}</td><td><b>${val.toFixed(6)}</b></td><td style="font-size:9px;color:#6b7280">${uses[k]}</td></tr>`;
+}
+document.getElementById('fullTable').innerHTML=html;
+convertLen();
+}
+function convertLen(){
+let v=parseFloat(document.getElementById('lenVal').value)||0;
+let from=document.getElementById('lenFrom').value;
+let to=document.getElementById('lenTo').value;
+let toMt={ft:0.3048, mt:1, inch:0.0254, yd:0.9144, km:1000};
+let mt = v*toMt[from];
+let res = mt / toMt[to];
+document.getElementById('lenResult').value = res.toFixed(4)+" "+to;
+}
+function clearAll(){
+document.getElementById('val').value=1;
+document.getElementById('lenVal').value=1;
+convert();
+toast('Cleared!');
+}
+function copyAll(){
+let txt=document.getElementById('rTitle').innerText+"\n"+document.getElementById('fullTable').innerText;
+navigator.clipboard.writeText(txt);toast('Copied All Units!');
+}
+function downloadPDF(){
+const card=document.getElementById('unitCard');
+html2canvas(card,{scale:2}).then(c=>{
+const img=c.toDataURL('image/png');
+const {jsPDF}=window.jspdf;
+const pdf=new jsPDF('p','mm','a4');
+const w=pdf.internal.pageSize.getWidth()-20;
+const h=c.height*w/c.width;
+pdf.addImage(img,'PNG',10,10,w,h);
+pdf.save('Unit-Converter-'+Date.now()+'.pdf');
+toast('PDF Downloaded!');
+});
+}
+convert();
+</script>
+</body>
+</html>

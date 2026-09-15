@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMI Calculator Pro - Home, Car, Bike Loan Calculator with Article</title>
+<meta name="description" content="Free EMI Calculator for Home Loan, Car Loan, Personal Loan with Year Month addition, Start to End Date, Prepayment, Chart and Full Article.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#f8f9fb;color:#111}
+.wrap{max-width:1100px;margin:0 auto;padding:20px}
+.card{background:#fff;border:1px solid #eee;border-radius:20px;padding:22px;box-shadow:0 10px 40px rgba(0,0,0,0.04)}
+.grid2{display:grid;grid-template-columns:1.2fr 0.8fr;gap:20px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+label{font-size:11px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.5px}
+input,select{width:100%;padding:13px 14px;border:1px solid #e5e7eb;border-radius:12px;margin-top:6px;margin-bottom:14px;font-size:14px;font-weight:600}
+input:focus,select:focus{border-color:#111;outline:none}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{padding:14px;border:none;border-radius:12px;font-weight:700;cursor:pointer}
+.btn-black{background:#111;color:#fff}.btn-light{background:#f1f2f6;color:#111}
+.kpis{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px}
+.kpi{background:#f8f9fb;border-radius:14px;padding:12px;text-align:center}.kpi b{font-size:16px;display:block}.kpi span{font-size:11px;color:#666}
+.table{width:100%;margin-top:12px;border-collapse:collapse;font-size:13px}.table th{background:#f8f9fb;text-align:left;padding:10px}.table td{padding:10px;border-bottom:1px solid #f1f1f1}
+.article{margin-top:30px;line-height:1.8;color:#333}.article h2{margin:26px 0 10px;font-size:22px}.article h3{margin:18px 0 8px;font-size:15px}
+.badge{display:inline-block;background:#111;color:#fff;padding:5px 12px;border-radius:20px;font-size:11px;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="badge">PRO EMI CALCULATOR - ALL LOANS</div>
+<h1 style="font-size:32px;font-weight:800;letter-spacing:-1px">EMI Calculator</h1>
+<p style="color:#666;margin:6px 0 18px">Home, Car, Bike, Personal Loan - Year + Month Feature</p>
+
+<div class="grid2">
+<div class="card">
+<!-- LOAN TYPE -->
+<label>1️⃣ Loan Type Chuno</label>
+<select id="loanType" onchange="setLoanType()">
+<option value="home">🏠 Home Loan - 9.5% - 20 Year</option>
+<option value="car" selected>🚗 Car Loan - 11.5% - 5 Year</option>
+<option value="personal">👤 Personal Loan - 14% - 3 Year</option>
+<option value="bike">🏍️ Bike Loan - 13% - 3 Year</option>
+<option value="education">🎓 Education Loan - 10% - 7 Year</option>
+</select>
+
+<label>Loan Amount (₹)</label><input type="number" id="amount" value="800000">
+<label>Interest Rate (% per year)</label><input type="number" id="rate" value="11.5" step="0.1">
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div><label>Years</label><input type="number" id="y" value="5"></div>
+<div><label>Months</label><input type="number" id="m" value="3" placeholder="0-11"></div>
+</div>
+
+<label>Loan Start Date</label><input type="date" id="sdate" value="2026-01-10">
+<label>Prepayment (Optional)</label><input type="number" id="prepay" value="0" placeholder="Ex: 100000">
+
+<div class="btns">
+<button class="btn btn-black" onclick="calc()">Calculate EMI →</button>
+<button class="btn btn-light" onclick="clearAll()">Clear All ✕</button>
+</div>
+
+<div class="kpis">
+<div class="kpi"><span>Monthly EMI</span><b id="emi">₹0</b></div>
+<div class="kpi"><span>Total Interest</span><b id="tint">₹0</b></div>
+<div class="kpi"><span>Total Payment</span><b id="tp">₹0</b></div>
+</div>
+
+<div style="background:#fff3f5;border:1px dashed #ff2e63;border-radius:14px;padding:12px;margin-top:12px;text-align:center">
+<b id="enddate" style="font-size:14px;display:block">Loan End: -</b>
+<span id="totalmonths" style="font-size:11px;color:#666"></span><br>
+<span id="save" style="font-size:12px;color:#ff2e63;font-weight:700"></span>
+</div>
+</div>
+
+<div class="card">
+<canvas id="chart"></canvas>
+<div style="margin-top:16px;font-size:13px;line-height:1.6" id="break"></div>
+</div>
+</div>
+
+<div class="card" style="margin-top:20px;overflow:auto">
+<b>📅 Year Wise Amortization Schedule</b>
+<table class="table" id="amort"></table>
+</div>
+
+<!-- ARTICLE -->
+<div class="article card">
+<h2>EMI Calculator - What is EMI? Full Guide in Hindi</h2>
+<p><b>EMI (Equated Monthly Installment)</b> matlab har mahine bank ko fixed paisa dena. Isme 2 cheez hoti hai - Principal (asal loan) aur Interest (byaj). Shuru me Interest jyada hota hai, baad me Principal jyada kat-ta hai.</p>
+<h3>EMI Ka Formula Kya Hai?</h3>
+<p><b>EMI = [P x R x (1+R)^N] / [(1+R)^N - 1]</b><br>P = Loan Amount, R = Monthly Interest Rate, N = Total Months. Hamare calculator me N = (Years x 12) + Months. Isliye tum 20 Year 3 Month jaise bhi daal sakte ho.</p>
+<h3>Car Loan Bhi Isi Se Calculate Hoga Kya?</h3>
+<p><b>Haan, 100%.</b> Home Loan, Car Loan, Bike Loan, Personal Loan sab ka formula same hai. Bas Interest Rate aur Tenure alag hota hai. Car Loan me aam taur par 11-13% interest aur 5-7 saal ka tenure hota hai. Home Loan me 9-10% aur 20-30 saal. Upar Loan Type select karoge to sab auto set ho jayega.</p>
+<h3>Year + Month Jodne Ka Fayda</h3>
+<p>Normal calculator me sirf Year ya Month me se ek dalta hai. Hamare me tum 1 Year 6 Month = 18 Month aise daal sakte ho. Saath me Start Date daaloge to End Date automatic niklega. Jaise Loan 10 Jan 2026 se shuru hai, 5 Year 3 Month ke liye hai to Khatam hoga 10 April 2031 ko.</p>
+<h3>EMI Kaise Kam Kare?</h3>
+<p>1. Har saal 1 EMI ka Prepayment karo - 20 saal ka loan 16 saal me khatam. 2. Downpayment jyada do. 3. Kam interest wala bank chuno. 4. Tenure kam rakho agar EMI afford kar sakte ho.</p>
+<h3>Is Calculator Ke Features</h3>
+<p>✔ All Loan Types ✔ Year + Month Addition ✔ Date to Date Calculation ✔ Prepayment Saving ✔ Pie Chart ✔ Amortization Table ✔ 100% Free & Mobile Friendly</p>
+<p style="margin-top:20px;background:#f8f9fb;padding:12px;border-radius:10px;font-size:12px"><b>Disclaimer:</b> Ye calculation estimate ke liye hai. Bank ke charges alag ho sakte hai.</p>
+</div>
+</div>
+
+<script>
+let myChart;
+function setLoanType(){
+let t=document.getElementById('loanType').value;
+if(t=='home'){document.getElementById('amount').value=1000000;document.getElementById('rate').value=9.5;document.getElementById('y').value=20;document.getElementById('m').value=0;}
+if(t=='car'){document.getElementById('amount').value=800000;document.getElementById('rate').value=11.5;document.getElementById('y').value=5;document.getElementById('m').value=3;}
+if(t=='personal'){document.getElementById('amount').value=300000;document.getElementById('rate').value=14;document.getElementById('y').value=3;document.getElementById('m').value=0;}
+if(t=='bike'){document.getElementById('amount').value=100000;document.getElementById('rate').value=13;document.getElementById('y').value=3;document.getElementById('m').value=0;}
+if(t=='education'){document.getElementById('amount').value=500000;document.getElementById('rate').value=10;document.getElementById('y').value=7;document.getElementById('m').value=0;}
+calc();
+}
+function calc(){
+let P=parseFloat(document.getElementById('amount').value)||0;
+let R=parseFloat(document.getElementById('rate').value)/12/100;
+let Y=parseInt(document.getElementById('y').value)||0;
+let M=parseInt(document.getElementById('m').value)||0;
+let N=Y*12+M;
+let pre=parseFloat(document.getElementById('prepay').value)||0;
+if(N<=0||P<=0) return;
+let emi=P*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1);
+let total=emi*N, tint=total-P;
+document.getElementById('emi').innerText='₹'+Math.round(emi).toLocaleString('en-IN');
+document.getElementById('tint').innerText='₹'+Math.round(tint).toLocaleString('en-IN');
+document.getElementById('tp').innerText='₹'+Math.round(total).toLocaleString('en-IN');
+document.getElementById('break').innerHTML=`Principal: ₹${P.toLocaleString('en-IN')} (${(P/total*100).toFixed(1)}%)<br>Interest: ₹${Math.round(tint).toLocaleString('en-IN')} (${(tint/total*100).toFixed(1)}%)<br>Total Tenure: ${Y} Year ${M} Month = ${N} Months`;
+let s=document.getElementById('sdate').value;
+if(s){let st=new Date(s), en=new Date(st); en.setMonth(en.getMonth()+N); document.getElementById('enddate').innerText='Loan Khatam: '+en.toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'}); document.getElementById('totalmonths').innerText=`Start: ${st.toLocaleDateString('en-IN')} | Total ${N} Months`; }
+else{ document.getElementById('enddate').innerText=`Khatam: ${Y} Year ${M} Month baad`; document.getElementById('totalmonths').innerText=`Total ${N} Months`; }
+document.getElementById('save').innerText=pre>0?`Prepayment ₹${pre.toLocaleString('en-IN')} se ~₹${Math.round(pre*R*(N/2)).toLocaleString('en-IN')} bachega`:'';
+if(myChart) myChart.destroy();
+myChart=new Chart(document.getElementById('chart'),{type:'doughnut',data:{labels:['Principal','Interest'],datasets:[{data:[P,tint],backgroundColor:['#111','#ff2e63'],borderWidth:0}]},options:{cutout:'70%',plugins:{legend:{position:'bottom'}}}});
+let bal=P, html='<tr><th>Year</th><th>Principal</th><th>Interest</th><th>Balance</th></tr>', yr=1, i=0;
+while(i<N){let yp=0,yi=0; for(let k=0;k<12&&i<N;k++,i++){let intr=bal*R, prin=emi-intr; if(bal-prin<0) prin=bal; bal-=prin; yp+=prin; yi+=intr; if(i==12&&pre>0){bal-=pre; yp+=pre;}} html+=`<tr><td>${yr++}</td><td>₹${Math.round(yp)}</td><td>₹${Math.round(yi)}</td><td>₹${Math.round(bal>0?bal:0)}</td></tr>`; if(bal<=0) break; }
+document.getElementById('amort').innerHTML=html;
+}
+function clearAll(){document.getElementById('amount').value='';document.getElementById('rate').value='';document.getElementById('y').value='';document.getElementById('m').value='';document.getElementById('prepay').value='';document.getElementById('sdate').value='';document.getElementById('emi').innerText='₹0';document.getElementById('tint').innerText='₹0';document.getElementById('tp').innerText='₹0';document.getElementById('enddate').innerText='Loan End: -';document.getElementById('totalmonths').innerText='';document.getElementById('save').innerText='';document.getElementById('break').innerHTML='';document.getElementById('amort').innerHTML=''; if(myChart) myChart.destroy();}
+calc();
+</script>
+</body>
+</html>

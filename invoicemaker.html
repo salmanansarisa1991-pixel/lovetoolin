@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free GST Invoice Maker - Estimate Bill Generator | Love Tool</title>
+<meta name="description" content="Free GST Invoice Maker - 0% to 28% GST + Cess + CGST SGST IGST. PDF, Print, Copy. 100% Private, No Server. Estimate Bill Generator for India.">
+<meta name="keywords" content="invoice maker, gst bill generator, free invoice, estimate maker, gst calculator">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧾</text></svg>">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#f0fdf4;line-height:1.7}
+header{background:#fff;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 12px rgba(0,0,0,0.06);position:sticky;top:0;z-index:100}
+.logo{font-family:'Space Grotesk';font-weight:800;font-size:20px;color:#064e3b}
+.logo span{color:#059669}
+nav a{margin-left:12px;text-decoration:none;color:#064e3b;font-weight:700;font-size:12px}
+nav a:hover{color:#059669}
+.article{max-width:1100px;margin:12px auto;background:#fff;padding:26px;border-radius:16px;border-left:8px solid #dc2626;border-right:8px solid #059669;box-shadow:0 8px 25px rgba(0,0,0,0.06)}
+.article h1{font-family:'Space Grotesk';font-size:22px;color:#064e3b;line-height:1.3}
+.article h2{font-size:15px;color:#fff;background:linear-gradient(90deg,#064e3b,#059669);display:inline-block;padding:6px 14px;border-radius:20px;margin:18px 0 8px 0}
+.article h3{font-size:13px;color:#064e3b;margin:14px 0 6px 0;font-weight:800}
+.article p{font-size:13px;color:#333;margin-top:8px}
+.article ul,.article ol{margin-left:20px;margin-top:6px}.article li{font-size:12.5px;color:#333;margin-top:5px}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;color:#fff;font-size:10px;font-weight:800;margin:4px 4px 0 0}
+.b-safe{background:#dc2626}.b-gst{background:#059669}.b-seo{background:#7c3aed}
+.container{max-width:1100px;margin:12px auto;display:grid;grid-template-columns:360px 1fr;gap:12px;padding:0 10px}
+@media(max-width:900px){.container{grid-template-columns:1fr}.left{position:relative!important;height:auto!important;max-height:none!important}}
+.left{background:#fff;padding:12px;border-radius:14px;border:2px solid #bbf7d0;height:96vh;overflow-y:auto;position:sticky;top:70px}
+.left h3{font-size:10.5px;color:#fff;padding:6px 10px;border-radius:8px;margin:10px 0 5px 0}
+.h-comp{background:linear-gradient(90deg,#064e3b,#059669)}.h-client{background:linear-gradient(90deg,#7c3aed,#a855f7)}.h-item{background:linear-gradient(90deg,#d97706,#f59e0b)}.h-bill{background:linear-gradient(90deg,#dc2626,#ef4444)}
+input,select,textarea{width:100%;padding:7px 9px;margin:2px 0 6px 0;border:2px solid #a7f3d0;border-radius:8px;font-size:11px;outline:none}
+.invalid{border-color:#ef4444!important;background:#fef2f2}
+.itemRow{display:grid;grid-template-columns:1fr 45px 65px 28px;gap:3px;align-items:center}
+.btn{padding:10px;border:none;border-radius:10px;font-weight:800;color:#fff;font-size:10.5px;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
+.btn-add{background:linear-gradient(135deg,#d97706,#f59e0b);width:100%;margin-top:5px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}
+.btn-pdf{background:linear-gradient(135deg,#059669,#10b981)}.btn-copy{background:linear-gradient(135deg,#2563eb,#3b82f6)}.btn-print{background:linear-gradient(135deg,#7c3aed,#a855f7)}.btn-clear{background:linear-gradient(135deg,#dc2626,#ef4444)}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#064e3b;color:#fff;padding:10px 18px;border-radius:30px;display:none;z-index:999;font-weight:800;font-size:11px;max-width:90%;text-align:center}
+#previewWrap{padding:14px;background:linear-gradient(135deg,#bbf7d0,#bfdbfe);border-radius:16px;display:flex;justify-content:center}
+#invoiceCard{width:100%;max-width:700px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,0.12);padding:18px;position:relative}
+.watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:28px;font-weight:900;color:rgba(220,38,38,0.07);pointer-events:none;letter-spacing:3px;border:4px solid rgba(220,38,38,0.07);padding:10px 28px;border-radius:12px;text-align:center;z-index:2}
+.inv-head{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #059669;padding-bottom:10px}
+.inv-meta{display:flex;justify-content:space-between;margin-top:10px;font-size:10.5px}
+.table{width:100%;border-collapse:collapse;margin-top:10px;font-size:10.5px}
+.table th{background:#064e3b;color:#fff;padding:6px;font-size:9.5px;text-align:left}
+.table td{padding:6px 7px;border-bottom:1px solid #e5e7eb}
+.totalBox{display:flex;justify-content:flex-end;margin-top:10px}
+.totalInner{width:240px;background:#f0fdf4;border-radius:10px;padding:8px;border:1.5px dashed #059669}
+.totalInner div{display:flex;justify-content:space-between;font-size:10.5px;margin:2px 0}
+.grand{font-weight:800;font-size:12.5px;border-top:2px solid #059669;padding-top:5px;color:#064e3b}
+.footerBox{max-width:1100px;margin:20px auto;background:#064e3b;color:#fff;padding:22px;border-radius:16px;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:16px}
+@media(max-width:700px){.footerBox{grid-template-columns:1fr}}
+.footerBox h4{font-size:13px;margin-bottom:8px;color:#bbf7d0}
+.footerBox p,.footerBox a{font-size:11px;color:#d1fae5;text-decoration:none;line-height:1.8}
+.footerBox a:hover{color:#fff;text-decoration:underline}
+.footer{text-align:center;margin-top:10px;font-size:8.5px;color:#6b7280;border-top:1px solid #e5e7eb;padding-top:6px;line-height:1.4}
+.safeBox{background:#fef2f2;border:1.5px solid #fecaca;border-radius:8px;padding:8px;margin-top:8px;font-size:9.5px;color:#991b1b}
+.lockedDisclaimer{background:#991b1b;color:#fff;padding:8px 10px;border-radius:8px;margin-top:10px;font-size:9px;font-weight:800;text-align:center;letter-spacing:0.3px;line-height:1.5;user-select:none}
+.pages{max-width:1100px;margin:12px auto;display:grid;gap:12px;padding:0 10px}
+.page{background:#fff;padding:20px;border-radius:14px;box-shadow:0 4px 15px rgba(0,0,0,0.05)}
+.page h2{font-size:16px;color:#064e3b;margin-bottom:8px}
+.page p{font-size:12px;color:#333}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">🧾 LoveTool<span>.online</span></div>
+<nav><a href="#tool">Tool</a><a href="#about">About</a><a href="#privacy">Privacy</a><a href="#contact">Contact</a></nav>
+</header>
+<div class="article">
+<h1>🧾 Safe Invoice Maker  - GST Bill Generator (Full Guide)</h1>
+<span class="badge b-safe">🔒 SAFE: Anti-Fake + INVALID Watermark</span>
+<span class="badge b-gst">GST: 0% to 28% + Cess + CGST/SGST/IGST/UTGST</span>
+<span class="badge b-seo">AdSense Ready: Article + Tool</span>
+<h2>Invoice Kya Hota Hai?</h2>
+<p>Invoice ya Bill ek legal document hai jo seller buyer ko deta hai. Isme saman ka naam, quantity, rate, GST, total likha hota hai. India me 2 tarah ke bill hote hai: <b>1. Estimate / Proforma</b> - quotation ke liye, <b>2. Tax Invoice</b> - GST law ke hisab se final. Hamara tool Estimate ke liye 100% safe hai.</p>
+<h2>India Me Kitne GST Lagte Hai?</h2>
+<ul>
+<li><b>0%:</b> Doodh, sabji, kitaab, hospital, school</li>
+<li><b>0.25%:</b> Rough diamonds</li><li><b>3%:</b> Gold, Silver, Jewellery</li><li><b>5%:</b> Kapde 1000 tak, transport</li><li><b>12%:</b> Mobile, processed food</li><li><b>18%:</b> Laptop, TV, most services</li><li><b>28%:</b> Luxury car, bike 350cc+, AC, cement</li><li><b>Cess:</b> Luxury pe extra 1% to 22%</li>
+</ul>
+<h3>CGST/SGST/IGST Me Fark?</h3>
+<ul>
+<li><b>CGST+SGST:</b> Same state (MP to MP) - 18% hai to 9% CGST + 9% SGST</li>
+<li><b>UTGST:</b> UT me SGST ki jagah</li>
+<li><b>IGST:</b> Other state (MP to Delhi) - pura 18% IGST</li>
+</ul>
+<h2>Use Kaise Kare?</h2>
+<ol>
+<li>Company naam, GSTIN daale</li><li>Client naam, Invoice No</li><li>Items jode - Qty x Rate</li><li>GST Type aur Rate select kare</li><li>PDF / Copy / Print kare</li>
+</ol>
+</div>
+<div class="container" id="tool">
+<div class="left">
+<h3 class="h-comp">🏢 Your Company</h3>
+<input type="file" id="logoInput" accept="image/*">
+<input type="text" id="compName" placeholder="Company - Sharma Traders" oninput="render()">
+<input type="text" id="compGst" placeholder="GSTIN - 23AAAAA0000A1Z5" oninput="validateGst();render()">
+<p id="gstMsg" style="font-size:9px;font-weight:700"></p>
+<input type="text" id="compAddr" placeholder="Address - Indore, MP" oninput="render()">
+<input type="text" id="compPhone" placeholder="Phone - +91 98XXX" oninput="render()">
+<h3 class="h-client">👤 Bill To</h3>
+<input type="text" id="clientName" placeholder="Client - Aarav Sharma" oninput="render()">
+<input type="text" id="clientAddr" placeholder="Client Address - Delhi" oninput="render()">
+<input type="text" id="invNo" placeholder="INV No" value="EST-001" oninput="render()">
+<input type="date" id="invDate" oninput="render()">
+<label style="font-size:10px"><input type="checkbox" id="isFinal" onchange="render()" style="width:auto"> Mark as Final Tax Invoice</label>
+<h3 class="h-item">📦 Items - Qty × Rate</h3>
+<div id="itemsInput"></div>
+<button class="btn btn-add" onclick="addItem()">+ Add Item</button>
+<h3 class="h-bill">💰 GST - All Rates</h3>
+<select id="gstType" onchange="render()"><option value="CGST_SGST">CGST + SGST - Same State</option><option value="SGST_UTGST">CGST + UTGST - UT</option><option value="IGST">IGST - Other State</option><option value="NONE">No GST / 0% / Exempt</option></select>
+<select id="gstRate" onchange="render()"><option value="0">0% - Nil</option><option value="0.25">0.25%</option><option value="3">3% - Gold</option><option value="5" selected>5%</option><option value="12">12%</option><option value="18">18% - Services</option><option value="28">28% - Luxury</option></select>
+<input type="number" id="cess" placeholder="Cess ₹" value="0" oninput="render()">
+<input type="number" id="discount" placeholder="Discount ₹" value="0" oninput="render()">
+<input type="number" id="shipping" placeholder="Shipping ₹" value="0" oninput="render()">
+<input type="text" id="terms" placeholder="Terms - Payment in 7 days" oninput="render()">
+<div class="safeBox">🔒 Default ESTIMATE. Valid GSTIN + Tick = TAX INVOICE.</div>
+<div class="btns"><button class="btn btn-pdf" onclick="downloadPDF()">⬇️ Safe PDF</button><button class="btn btn-copy" onclick="copyInvoice()">📋 Copy</button><button class="btn btn-print" onclick="window.print()">🖨️ Print</button><button class="btn btn-clear" onclick="clearAll()">🗑️ Clear</button></div>
+</div>
+<div id="previewWrap">
+<div id="invoiceCard">
+<div id="wmMain" class="watermark">ESTIMATE</div>
+<div class="inv-head"><div><h1 id="rCompName" style="font-family:'Space Grotesk';font-size:20px;color:#064e3b">SHARMA TRADERS</h1><p style="font-size:9px;color:#6b7280" id="rCompAddr">Indore | +91 98XXX</p><p style="font-size:8.5px;color:#991b1b;font-weight:800" id="rCompGst">GSTIN: 23AAAAA0000A1Z5</p></div><img id="rLogo" style="width:50px;height:50px;object-fit:contain;display:none;border-radius:6px;border:1px solid #e5e7eb"></div>
+<div class="inv-meta"><div><b>Bill To:</b><br><span id="rClientName" style="font-weight:800">Aarav Sharma</span><br><span id="rClientAddr" style="color:#6b7280">Delhi</span></div><div style="text-align:right"><b id="rInvNo">EST-001</b><br><span id="rInvDate"></span><br><span id="rGstType" style="font-size:8px;background:#ecfdf5;padding:2px 6px;border-radius:10px">CGST+SGST</span></div></div>
+<table class="table" id="invTable"><thead><tr><th>#</th><th>Item</th><th>Qty</th><th>Rate</th><th>Amt</th></tr></thead><tbody></tbody></table>
+<div class="totalBox"><div class="totalInner"><div><span>Subtotal</span><span id="rSubtotal">₹0</span></div><div id="rCgstRow"><span id="rCgstLabel">CGST</span><span id="rCgst">₹0</span></div><div id="rSgstRow"><span id="rSgstLabel">SGST</span><span id="rSgst">₹0</span></div><div id="rIgstRow" style="display:none"><span id="rIgstLabel">IGST</span><span id="rIgst">₹0</span></div><div><span>Cess</span><span id="rCess">+₹0</span></div><div><span>Discount</span><span id="rDiscount">-₹0</span></div><div><span>Shipping</span><span id="rShipping">+₹0</span></div><div class="grand"><span>Grand Total</span><span id="rGrand">₹0</span></div><div style="font-size:8.5px;color:#6b7280;margin-top:3px" id="rWords">Zero Rupees</div></div></div>
+<div class="footer"><p id="rTerms">Terms: Estimate only.</p><div id="legalLock" class="lockedDisclaimer">⚠️ DISCLAIMER: This is computer generated ESTIMATE, NOT a Government approved Tax Invoice. Valid GSTIN, signature & e-Invoice IRN required as per GST Law.</div><p>Safe Invoice Maker • No Server • 100% Private</p></div>
+</div>
+</div>
+</div>
+
+<div class="footerBox">
+<div><h4>🧾Love Tool.online</h4><p>Free, Safe aur 100% Private GST Invoice Maker. No Server, No Data Save. Sirf Estimate ke liye. Made in India for Indian Businesses.</p></div>
+
+<div><h4>Safe Notice</h4><p>⚠️ Default ESTIMATE watermark. Valid GSTIN check. Har PDF pe disclaimer lock hai. Govt Logo use karna mana hai. Fake bill banana kanoonan jurm hai.</p></div>
+</div>
+<div style="text-align:center;padding:10px;font-size:10px;color:#6b7280">© 2026 LoveTool.online - All Rights Reserved • 100% Safe & Private</div>
+<div id="toast"></div>
+<script>
+let items=[{name:'Website Design Service',qty:1,rate:5000},{name:'Gold Ring 10gm',qty:1,rate:60000}];
+let isGstValid=false;
+document.getElementById('invDate').valueAsDate=new Date();
+document.getElementById('logoInput').addEventListener('change',e=>{const r=new FileReader();r.onload=ev=>{const im=document.getElementById('rLogo');im.src=ev.target.result;im.style.display='block';};r.readAsDataURL(e.target.files[0]);});
+function validateGst(){const gst=document.getElementById('compGst').value.trim().toUpperCase();document.getElementById('compGst').value=gst;const pat=/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;const msg=document.getElementById('gstMsg');const inp=document.getElementById('compGst');if(gst.length===0){msg.innerText='';inp.classList.remove('invalid');isGstValid=false;return;}if(pat.test(gst)){msg.innerText='✅ Valid GSTIN';msg.style.color='#059669';inp.classList.remove('invalid');isGstValid=true;}else{msg.innerText='❌ Invalid - INVALID ayega';msg.style.color='#dc2626';inp.classList.add('invalid');isGstValid=false;}}
+function renderInputs(){const wrap=document.getElementById('itemsInput');wrap.innerHTML='';items.forEach((it,i)=>{wrap.innerHTML+=`<div class="itemRow"><input type="text" value="${it.name.replace(/"/g,'&quot;')}" oninput="items[${i}].name=this.value;render()"><input type="number" value="${it.qty}" oninput="items[${i}].qty=parseFloat(this.value)||0;render()"><input type="number" value="${it.rate}" oninput="items[${i}].rate=parseFloat(this.value)||0;render()"><button onclick="items.splice(${i},1);renderInputs();render()" style="background:#ef4444;color:#fff;border:none;border-radius:6px;padding:3px 6px">×</button></div>`;});}
+function addItem(){items.push({name:'',qty:1,rate:0});renderInputs();render();}
+function toast(m){const t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',3500);}
+function numberToWords(num){const a=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];const b=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];function inW(n){if(n<20) return a[n];if(n<100) return b[Math.floor(n/10)]+' '+(n%10?a[n%10]:'');if(n<1000) return a[Math.floor(n/100)]+' Hundred '+(n%100?inW(n%100):'');if(n<100000) return inW(Math.floor(n/1000))+' Thousand '+(n%1000?inW(n%1000):'');if(n<10000000) return inW(Math.floor(n/100000))+' Lakh '+(n%100000?inW(n%100000):'');return inW(Math.floor(n/10000000))+' Crore '+(n%10000000?inW(n%10000000):'');}if(num===0) return 'Zero';return inW(Math.floor(num)).trim();}
+function render(){document.getElementById('rCompName').innerText=(document.getElementById('compName').value||'SHARMA TRADERS').toUpperCase();document.getElementById('rCompAddr').innerText=(document.getElementById('compAddr').value||'Indore, MP')+' | '+(document.getElementById('compPhone').value||'+91 98XXX');const gstVal=document.getElementById('compGst').value||'23AAAAA0000A1Z5';document.getElementById('rCompGst').innerHTML=`GSTIN: ${gstVal} | <span style="color:${isGstValid?'#059669':'#dc2626'}">${isGstValid?'VALID':'INVALID / ESTIMATE ONLY'}</span>`;document.getElementById('rClientName').innerText=document.getElementById('clientName').value||'Aarav Sharma';document.getElementById('rClientAddr').innerText=document.getElementById('clientAddr').value||'Delhi';let invNo=document.getElementById('invNo').value||'EST-001';if(!isGstValid&&document.getElementById('isFinal').checked){document.getElementById('isFinal').checked=false;toast('❌ Valid GSTIN chahiye');}if(document.getElementById('isFinal').checked&&isGstValid) invNo=invNo.replace('EST','TAX');document.getElementById('rInvNo').innerText=invNo;const d=document.getElementById('invDate').value;document.getElementById('rInvDate').innerText='Date: '+(d?new Date(d).toLocaleDateString('en-IN'):new Date().toLocaleDateString('en-IN'));document.getElementById('rGstType').innerText=document.getElementById('gstType').value.replace('_','+');let subtotal=0;items.forEach(it=>subtotal+=(parseFloat(it.qty)||0)*(parseFloat(it.rate)||0));const gstRate=parseFloat(document.getElementById('gstRate').value)||0;const gstType=document.getElementById('gstType').value;let cgst=0,sgst=0,igst=0;if(gstRate>0&&gstType!=='NONE'){if(gstType==='CGST_SGST'||gstType==='SGST_UTGST'){cgst=subtotal*gstRate/2/100;sgst=cgst;}else if(gstType==='IGST'){igst=subtotal*gstRate/100;}}const cess=parseFloat(document.getElementById('cess').value)||0;const discount=parseFloat(document.getElementById('discount').value)||0;const shipping=parseFloat(document.getElementById('shipping').value)||0;const grand=subtotal+cgst+sgst+igst+cess-discount+shipping;const tbody=document.querySelector('#invTable tbody');tbody.innerHTML='';items.forEach((it,i)=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${i+1}</td><td></td><td>${it.qty}</td><td>₹${it.rate}</td><td>₹${(it.qty*it.rate).toFixed(0)}</td>`;tr.children[1].innerText=it.name||'Item';tbody.appendChild(tr);});document.getElementById('rSubtotal').innerText='₹'+subtotal.toFixed(0);document.getElementById('rCgst').innerText='₹'+cgst.toFixed(0);document.getElementById('rSgst').innerText='₹'+sgst.toFixed(0);document.getElementById('rIgst').innerText='₹'+igst.toFixed(0);document.getElementById('rCgstLabel').innerText=(gstType==='SGST_UTGST'?'CGST':'CGST')+' ('+(gstRate/2)+'%)';document.getElementById('rSgstLabel').innerText=(gstType==='SGST_UTGST'?'UTGST':'SGST')+' ('+(gstRate/2)+'%)';document.getElementById('rIgstLabel').innerText='IGST ('+gstRate+'%)';document.getElementById('rCgstRow').style.display=(gstType==='CGST_SGST'||gstType==='SGST_UTGST')&&gstRate>0?'flex':'none';document.getElementById('rSgstRow').style.display=(gstType==='CGST_SGST'||gstType==='SGST_UTGST')&&gstRate>0?'flex':'none';document.getElementById('rIgstRow').style.display=gstType==='IGST'&&gstRate>0?'flex':'none';document.getElementById('rCess').innerText='+₹'+cess.toFixed(0);document.getElementById('rDiscount').innerText='-₹'+discount.toFixed(0);document.getElementById('rShipping').innerText='+₹'+shipping.toFixed(0);document.getElementById('rGrand').innerText='₹'+grand.toFixed(0);document.getElementById('rWords').innerText=numberToWords(grand)+' Rupees Only';document.getElementById('rTerms').innerText=document.getElementById('terms').value||'Terms: Estimate only.';const wm=document.getElementById('wmMain');if(!isGstValid){wm.innerText='INVALID GSTIN';wm.style.color='rgba(220,38,38,0.12)';}else if(!document.getElementById('isFinal').checked){wm.innerText='ESTIMATE';wm.style.color='rgba(5,150,105,0.10)';}else{wm.innerText='TAX INVOICE';wm.style.color='rgba(6,78,59,0.07)';}}
+function copyInvoice(){const txt=`${document.getElementById('rInvNo').innerText} | ${document.getElementById('rInvDate').innerText}\n${document.getElementById('rCompName').innerText} | ${document.getElementById('compGst').value}\nBill To: ${document.getElementById('rClientName').innerText}\n---\n${items.map((it,i)=>`${i+1}. ${it.name} - ${it.qty}x₹${it.rate}=₹${it.qty*it.rate}`).join('\n')}\n---\nTotal: ${document.getElementById('rGrand').innerText} (${document.getElementById('rWords').innerText})\n\n⚠️ DISCLAIMER: ESTIMATE ONLY, NOT Govt Tax Invoice.`;navigator.clipboard.writeText(txt).then(()=>toast('✅ Copy Ho Gaya!')).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('✅ Copy Ho Gaya!');});}
+async function downloadPDF(){const {jsPDF}=window.jspdf;const card=document.getElementById('invoiceCard');toast('⏳ PDF ban raha hai...');const canvas=await html2canvas(card,{scale:2,useCORS:true,backgroundColor:'#fff'});const img=canvas.toDataURL('image/png');const pdf=new jsPDF('p','mm','a4');const w=pdf.internal.pageSize.getWidth();const h=(canvas.height*w)/canvas.width;pdf.addImage(img,'PNG',0,0,w,h);pdf.save((document.getElementById('rInvNo').innerText||'invoice')+'.pdf');toast('✅ PDF Download!');}
+function clearAll(){if(confirm('Clear All?')){items=[{name:'',qty:1,rate:0}];document.querySelectorAll('input[type=text],input[type=number]').forEach(i=>{if(i.id!=='invNo') i.value='';});document.getElementById('invNo').value='EST-001';renderInputs();render();toast('🗑️ Cleared');}}
+const observer=new MutationObserver(()=>{if(!document.getElementById('legalLock')){const foot=document.querySelector('.footer');const div=document.createElement('div');div.id='legalLock';div.className='lockedDisclaimer';div.innerText='⚠️ DISCLAIMER: This is computer generated ESTIMATE, NOT a Government approved Tax Invoice. Valid GSTIN, signature & e-Invoice IRN required as per GST Law.';foot.prepend(div);toast('⚠️ Disclaimer hatana allowed nahi!');}});observer.observe(document.getElementById('invoiceCard'),{childList:true,subtree:true});
+renderInputs();render();validateGst();
+</script>
+</body>
+</html>

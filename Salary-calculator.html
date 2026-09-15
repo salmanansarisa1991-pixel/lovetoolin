@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salary Calculator Ultimate Pro 2025 - Old vs New Tax + HRA + 80C</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#fffafc;line-height:1.7}
+.top-nav{background:#fff;padding:15px 3%;box-shadow:0 2px 12px rgba(0,0,0,.06);display:flex;flex-wrap:wrap;gap:10px;justify-content:center;position:sticky;top:0;z-index:999}
+.top-nav a{text-decoration:none;padding:9px 18px;border-radius:30px;font-weight:600;font-size:13px}
+.top-nav a.light{background:#fdf2f8;color:#444;border:1px solid #fce7f3}
+.top-nav a.pink{background:#f472b6;color:#fff}
+.top-nav a.red{background:linear-gradient(135deg,#fb7185,#f43f5e);color:#fff}
+.article{max-width:1100px;margin:15px auto;background:#fff;padding:26px;border-radius:16px;border-left:8px solid #059669;border-right:8px solid #2563eb;box-shadow:0 8px 25px rgba(0,0,0,0.06)}
+.article h1{font-size:22px;color:#064e3b}
+.article h2{font-size:13px;color:#fff;background:linear-gradient(90deg,#059669,#2563eb);display:inline-block;padding:6px 14px;border-radius:20px;margin:16px 0 8px 0}
+.article h3{font-size:13px;color:#064e3b;margin:12px 0 6px 0;font-weight:800}
+.article p,.article li{font-size:12.5px;color:#333;margin-top:6px}.article ul,.article ol{margin-left:18px}
+.badge{display:inline-block;padding:4px 10px;border-radius:20px;color:#fff;font-size:9.5px;font-weight:800;margin:3px 4px 0 0}
+.b-pro{background:#059669}.b-tax{background:#dc2626}.b-full{background:#7c3aed}.b-time{background:#d97706}
+.container{max-width:1100px;margin:12px auto;display:grid;grid-template-columns:380px 1fr;gap:12px;padding:0 10px}
+@media(max-width:900px){.container{grid-template-columns:1fr}}
+.left{background:#fff;padding:12px;border-radius:14px;border:2px solid #a7f3d0;height:96vh;overflow-y:auto;position:sticky;top:85px}
+.left h3{font-size:10.5px;color:#fff;padding:6px 10px;border-radius:8px;margin:10px 0 5px 0}
+.h-ctc{background:linear-gradient(90deg,#059669,#10b981)}.h-allow{background:linear-gradient(90deg,#2563eb,#3b82f6)}.h-deduct{background:linear-gradient(90deg,#dc2626,#ef4444)}.h-tax{background:linear-gradient(90deg,#7c3aed,#a855f7)}.h-time{background:linear-gradient(90deg,#d97706,#f59e0b)}
+input,select{width:100%;padding:7px 9px;margin:2px 0 6px 0;border:2px solid #a7f3d0;border-radius:8px;font-size:11px;outline:none}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}
+.btn{padding:10px;border:none;border-radius:10px;font-weight:800;color:#fff;font-size:10.5px;cursor:pointer}
+.btn-pdf{background:linear-gradient(135deg,#059669,#10b981)}.btn-copy{background:linear-gradient(135deg,#2563eb,#3b82f6)}.btn-print{background:linear-gradient(135deg,#7c3aed,#a855f7)}.btn-clear{background:linear-gradient(135deg,#dc2626,#ef4444)}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#064e3b;color:#fff;padding:10px 18px;border-radius:30px;display:none;z-index:999;font-weight:800;font-size:11px}
+#previewWrap{padding:14px;background:linear-gradient(135deg,#a7f3d0,#bfdbfe,#ddd6fe);border-radius:16px;display:flex;justify-content:center}
+#salaryCard{width:100%;max-width:740px;background:#fff;border-radius:14px;padding:18px;box-shadow:0 15px 40px rgba(0,0,0,0.12)}
+.head{display:flex;justify-content:space-between;border-bottom:3px solid #059669;padding-bottom:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+.box{border-radius:10px;padding:10px;text-align:center;border:1.5px dashed}
+.box b{font-size:10px;display:block}.box span{font-size:16px;font-weight:800;display:block}
+.b-green{background:#f0fdf4;border-color:#86efac}.b-blue{background:#eff6ff;border-color:#93c5fd}.b-purple{background:#f5f3ff;border-color:#c4b5fd}.b-orange{background:#fffbeb;border-color:#fcd34d}.b-red{background:#fef2f2;border-color:#fca5a5}.b-yellow{background:#fefce8;border-color:#fde68a}
+.table{width:100%;border-collapse:collapse;margin-top:10px;font-size:10.5px}
+.table th{background:#064e3b;color:#fff;padding:6px;text-align:left}
+.table td{padding:6px 8px;border-bottom:1px solid #e5e7eb}
+.taxCompare{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.taxBox{border-radius:10px;padding:10px;border:1.5px solid #e5e7eb;text-align:center}
+.taxBox.best{border:2px solid #059669;background:#f0fdf4}
+.timeGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;margin-top:10px}
+.timeBox{background:#fff;border-radius:10px;padding:8px;text-align:center;border:1.5px solid #e5e7eb}
+.footer{text-align:center;margin-top:10px;font-size:8px;color:#6b7280;border-top:1px solid #e5e7eb;padding-top:6px}
+</style>
+</head>
+<body>
+
+<div class="top-nav">
+<a href="index.html" class="light">Home</a>
+<a href="invoice-maker.html" class="pink">Invoice Maker</a>
+<a href="salary-calculator.html" class="red">💰 Salary Calculator Pro</a>
+<a href="love-calculator-pro.html" class="red">Love Calculator</a>
+<a href="emi-calculator.html" class="red">Emi Calculator</a>
+</div>
+
+<div class="article">
+<h1>💰 Salary Calculator Pro Ultimate 2025 - Old vs New Tax Regime + HRA Exemption + 80C + Month/Day/Hour</h1>
+<span class="badge b-pro">ULTIMATE PRO: CTC to In-Hand Full</span>
+<span class="badge b-tax">OLD vs NEW TAX + AUTO TDS + HRA + 80C + 80D</span>
+<span class="badge b-full">Month + Day + Hour + Week + Year</span>
+<span class="badge b-time">PDF + Copy + Print + Clear</span>
+<h2>1. Salary Kya Hai? CTC vs In-Hand vs Gross</h2>
+<p><b>CTC:</b> Company ka total kharcha. <b>Gross:</b> Basic+HRA+DA+Special+Conveyance+Medical+Bonus. <b>In-Hand:</b> Gross me se PF+ESI+PT+TDS cut ke baad bank me jo aata hai.</p>
+<h2>2. India Me Tax 2025-26 - Old vs New Regime</h2>
+<p><b>New Regime:</b> 0-4L 0%, 4-8L 5%, 8-12L 10%, 12-16L 15%, 16-20L 20%, 20-24L 25%, 24L+ 30%. Std Deduction ₹75,000. 12 Lakh tak rebate.</p>
+<p><b>Old Regime:</b> 0-2.5L 0%, 2.5-5L 5%, 5-10L 20%, 10L+ 30%. Std ₹50k + 80C 1.5L + 80D 25k + HRA.</p>
+<h2>3. Use Kaise Kare?</h2>
+<ol>
+<li>CTC Daale - 80,000. Basic 40%, HRA 50%.</li>
+<li>Allowances - Special auto, Conveyance 1600, Medical 1250.</li>
+<li>Deductions - PF, ESI, PT 200.</li>
+<li>Tax - 80C, 80D, HRA Exemption daale - auto best batayega.</li>
+<li>Buttons - PDF, Copy, Print, Clear.</li>
+</ol>
+</div>
+
+<div class="container">
+<div class="left">
+<h3 class="h-ctc">💼 Employee + CTC</h3>
+<div class="row2"><input type="text" id="empName" placeholder="Employee Name" oninput="render()"><input type="text" id="compName" placeholder="Company Name" oninput="render()"></div>
+<input type="number" id="ctcMonthly" placeholder="Monthly CTC ₹" value="80000" oninput="render()">
+<div class="row2"><input type="number" id="basic" placeholder="Basic % of CTC" value="40" oninput="render()"><input type="number" id="hraPercent" placeholder="HRA % of Basic" value="50" oninput="render()"></div>
+<h3 class="h-allow">➕ Allowances</h3>
+<div class="row2"><input type="number" id="da" placeholder="DA ₹" value="0" oninput="render()"><input type="number" id="convey" placeholder="Conveyance ₹" value="1600" oninput="render()"></div>
+<div class="row2"><input type="number" id="medical" placeholder="Medical ₹" value="1250" oninput="render()"><input type="number" id="bonusMonthly" placeholder="Monthly Bonus ₹" value="0" oninput="render()"></div>
+<input type="number" id="special" placeholder="Special Allowance ₹ (Auto if blank)" oninput="render()">
+<h3 class="h-deduct">➖ PF / ESI / PT</h3>
+<div class="row2"><label><input type="checkbox" id="pfCheck" checked onchange="render()" style="width:auto"> PF 12%</label><label><input type="checkbox" id="esiCheck" checked onchange="render()" style="width:auto"> ESI 0.75%</label></div>
+<div class="row2"><input type="number" id="pt" placeholder="PT ₹" value="200" oninput="render()"><input type="number" id="otherDeduct" placeholder="Other Deduct ₹" value="0" oninput="render()"></div>
+<h3 class="h-tax">🧾 Old vs New Tax - Auto TDS</h3>
+<select id="regime" onchange="render()"><option value="BEST">Auto Best (Old vs New Compare)</option><option value="NEW">New Regime (Default 2025)</option><option value="OLD">Old Regime (with 80C/HRA)</option></select>
+<input type="number" id="annualBonus" placeholder="Annual Bonus ₹" value="0" oninput="render()">
+<div class="row2"><input type="number" id="c80" placeholder="80C ₹ (max 1.5L)" value="150000" oninput="render()"><input type="number" id="d80" placeholder="80D ₹ (max 25k)" value="25000" oninput="render()"></div>
+<input type="number" id="hraExempt" placeholder="HRA Exemption ₹/year" value="120000" oninput="render()">
+<h3 class="h-time">⏰ Time - Month / Day / Hour / Week</h3>
+<div class="row2"><input type="number" id="workDays" placeholder="Days/Month" value="30" oninput="render()"><input type="number" id="workHours" placeholder="Hours/Day" value="8" oninput="render()"></div>
+<div class="btns">
+<button class="btn btn-pdf" onclick="downloadPDF()">⬇️ PDF Slip</button>
+<button class="btn btn-copy" onclick="copySalary()">📋 Copy Text</button>
+<button class="btn btn-print" onclick="window.print()">🖨️ Print</button>
+<button class="btn btn-clear" onclick="clearAll()">🗑️ Clear</button>
+</div>
+</div>
+
+<div id="previewWrap">
+<div id="salaryCard">
+<div class="head"><div><h1 id="rCompName">ACCENTURE</h1><p style="font-size:9px;color:#6b7280" id="rEmpName">Employee: Aarav Sharma | Salary Slip Pro</p><p style="font-size:8.5px;color:#059669;font-weight:800" id="rDate">Sep 2026</p></div><div style="text-align:right"><span style="font-size:9px;background:#ecfdf5;padding:3px 8px;border-radius:20px;font-weight:700" id="rCtcBadge">CTC 80k</span><br><span style="font-size:8px;background:#fffbeb;padding:2px 6px;border-radius:10px" id="rRegimeBadge">BEST: NEW</span></div></div>
+<div class="grid3"><div class="box b-green"><b>Gross / Month</b><span id="rGross">₹0</span></div><div class="box b-red"><b>Deduction / Month</b><span id="rTotalDed">₹0</span></div><div class="box b-blue"><b>Net In-Hand / Month</b><span id="rNet">₹0</span></div></div>
+<div class="taxCompare"><div class="taxBox" id="newBox"><small>New Regime Tax</small><br><b id="rNewTax">₹0</b><br><small id="rNewTaxable">Taxable 0</small></div><div class="taxBox" id="oldBox"><small>Old Regime Tax</small><br><b id="rOldTax">₹0</b><br><small id="rOldTaxable">Taxable 0</small></div></div>
+<div class="grid3" style="margin-top:8px"><div class="box b-orange"><b>Annual CTC</b><span id="rAnnualCtc">₹0</span></div><div class="box b-purple"><b>Annual In-Hand</b><span id="rAnnualNet">₹0</span></div><div class="box b-yellow"><b>Monthly TDS</b><span id="rTdsMonth">₹0</span><br><small id="rBestRegime">Best Regime</small></div></div>
+<table class="table"><thead><tr><th>Component</th><th>Monthly</th><th>Yearly</th></tr></thead><tbody id="salaryTable"></tbody></table>
+<div class="timeGrid"><div class="timeBox"><small>Per Month</small><big id="rPerMonth">₹0</big></div><div class="timeBox"><small>Per Day</small><big id="rPerDay">₹0</big></div><div class="timeBox"><small>Per Hour</small><big id="rPerHour">₹0</big></div><div class="timeBox"><small>Per Week</small><big id="rPerWeek">₹0</big></div></div>
+<div class="timeGrid"><div class="timeBox"><small>Per Year In-Hand</small><big id="rPerYear">₹0</big></div><div class="timeBox"><small>Savings PF+Gratuity/Year</small><big id="rSavings">₹0</big></div><div class="timeBox"><small>Effective Tax %</small><big id="rEffTax">0%</big></div><div class="timeBox"><small>Take Home %</small><big id="rTakeHomePerc">0%</big></div></div>
+<div class="footer">Estimate only, consult CA. Salary Calculator Ultimate Pro • No Server • Private</div>
+</div>
+</div>
+</div>
+<div id="toast"></div>
+<script>
+function toast(m){const t=document.getElementById('toast');t.innerText=m;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
+function calcNewTax(income){let tax=0;if(income>400000) tax+=Math.min(income-400000,400000)*0.05;if(income>800000) tax+=Math.min(income-800000,400000)*0.10;if(income>1200000) tax+=Math.min(income-1200000,400000)*0.15;if(income>1600000) tax+=Math.min(income-1600000,400000)*0.20;if(income>2000000) tax+=Math.min(income-2000000,400000)*0.25;if(income>2400000) tax+=(income-2400000)*0.30;if(income<=1200000) tax=0;return Math.round(tax*1.04);}
+function calcOldTax(income){let tax=0;if(income<=250000) tax=0;else if(income<=500000) tax=(income-250000)*0.05;else if(income<=1000000) tax=12500+(income-500000)*0.20;else tax=112500+(income-1000000)*0.30;if(income<=500000) tax=0;return Math.round(tax*1.04);}
+function render(){
+const ctcMonthly=parseFloat(document.getElementById('ctcMonthly').value)||0;const basicPerc=parseFloat(document.getElementById('basic').value)||40;const hraPerc=parseFloat(document.getElementById('hraPercent').value)||50;
+const da=parseFloat(document.getElementById('da').value)||0;const convey=parseFloat(document.getElementById('convey').value)||0;const medical=parseFloat(document.getElementById('medical').value)||0;const bonusMonthly=parseFloat(document.getElementById('bonusMonthly').value)||0;
+let specialInput=document.getElementById('special').value;let basic=ctcMonthly*basicPerc/100;let hra=basic*hraPerc/100;
+let special=specialInput===''?ctcMonthly-(basic+hra+da+convey+medical+bonusMonthly):parseFloat(specialInput)||0;if(special<0) special=0;
+const gross=basic+hra+da+special+convey+medical+bonusMonthly;
+const pfMonthly=document.getElementById('pfCheck').checked?Math.min(basic*0.12,1800):0;const esiMonthly=document.getElementById('esiCheck').checked&&gross<=21000?gross*0.0075:0;
+const pt=parseFloat(document.getElementById('pt').value)||0;const otherDeduct=parseFloat(document.getElementById('otherDeduct').value)||0;const annualBonus=parseFloat(document.getElementById('annualBonus').value)||0;
+const c80=Math.min(parseFloat(document.getElementById('c80').value)||0,150000);const d80=Math.min(parseFloat(document.getElementById('d80').value)||0,25000);const hraExempt=parseFloat(document.getElementById('hraExempt').value)||0;
+const grossAnnual=gross*12+annualBonus;const stdNew=75000;const stdOld=50000;
+const taxableNew=Math.max(0,grossAnnual-stdNew);const taxableOld=Math.max(0,grossAnnual-stdOld-c80-d80-hraExempt);
+const taxNewAnnual=calcNewTax(taxableNew);const taxOldAnnual=calcOldTax(taxableOld);
+let bestRegime,taxAnnual;const regimeSel=document.getElementById('regime').value;
+if(regimeSel==='NEW'){bestRegime='NEW';taxAnnual=taxNewAnnual}else if(regimeSel==='OLD'){bestRegime='OLD';taxAnnual=taxOldAnnual}else{if(taxNewAnnual<=taxOldAnnual){bestRegime='NEW';taxAnnual=taxNewAnnual}else{bestRegime='OLD';taxAnnual=taxOldAnnual}}
+const tdsMonthly=taxAnnual/12;const totalDedMonthly=pfMonthly+esiMonthly+pt+otherDeduct+tdsMonthly;const netMonthly=gross-totalDedMonthly;
+const gratuity=basic*0.0481*12;const annualCtc=grossAnnual+gratuity+(pfMonthly*12);const annualNet=netMonthly*12;
+const workDays=parseFloat(document.getElementById('workDays').value)||30;const workHours=parseFloat(document.getElementById('workHours').value)||8;
+const perDay=netMonthly/workDays;const perHour=perDay/workHours;const perWeek=perDay*7;
+document.getElementById('rCompName').innerText=(document.getElementById('compName').value||'ACCENTURE').toUpperCase();
+document.getElementById('rEmpName').innerText='Employee: '+(document.getElementById('empName').value||'Aarav Sharma');
+document.getElementById('rDate').innerText=new Date().toLocaleDateString('en-IN',{month:'long',year:'numeric'});
+document.getElementById('rCtcBadge').innerText='CTC ₹'+ctcMonthly.toLocaleString('en-IN')+'/mo';
+document.getElementById('rRegimeBadge').innerText='BEST: '+bestRegime+' | TDS ₹'+Math.round(tdsMonthly).toLocaleString()+'/mo';
+document.getElementById('rGross').innerText='₹'+Math.round(gross).toLocaleString('en-IN');
+document.getElementById('rTotalDed').innerText='₹'+Math.round(totalDedMonthly).toLocaleString('en-IN');
+document.getElementById('rNet').innerText='₹'+Math.round(netMonthly).toLocaleString('en-IN');
+document.getElementById('rNewTax').innerText='₹'+taxNewAnnual.toLocaleString('en-IN')+'/yr';
+document.getElementById('rOldTax').innerText='₹'+taxOldAnnual.toLocaleString('en-IN')+'/yr';
+document.getElementById('rNewTaxable').innerText='Taxable ₹'+taxableNew.toLocaleString('en-IN');
+document.getElementById('rOldTaxable').innerText='Taxable ₹'+taxableOld.toLocaleString('en-IN');
+document.getElementById('rAnnualCtc').innerText='₹'+Math.round(annualCtc).toLocaleString('en-IN');
+document.getElementById('rAnnualNet').innerText='₹'+Math.round(annualNet).toLocaleString('en-IN');
+document.getElementById('rTdsMonth').innerText='₹'+Math.round(tdsMonthly).toLocaleString('en-IN');
+document.getElementById('rBestRegime').innerText='Best: '+bestRegime;
+document.getElementById('salaryTable').innerHTML=`<tr><td>Basic</td><td>₹${Math.round(basic).toLocaleString()}</td><td>₹${Math.round(basic*12).toLocaleString()}</td></tr><tr><td>HRA</td><td>₹${Math.round(hra).toLocaleString()}</td><td>₹${Math.round(hra*12).toLocaleString()}</td></tr><tr><td>Special</td><td>₹${Math.round(special).toLocaleString()}</td><td>₹${Math.round(special*12).toLocaleString()}</td></tr><tr><td>Gross</td><td>₹${Math.round(gross).toLocaleString()}</td><td>₹${Math.round(gross*12).toLocaleString()}</td></tr><tr><td><b>Net In-Hand</b></td><td><b>₹${Math.round(netMonthly).toLocaleString()}</b></td><td><b>₹${Math.round(annualNet).toLocaleString()}</b></td></tr>`;
+document.getElementById('rPerMonth').innerText='₹'+Math.round(netMonthly).toLocaleString('en-IN');
+document.getElementById('rPerDay').innerText='₹'+Math.round(perDay).toLocaleString('en-IN');
+document.getElementById('rPerHour').innerText='₹'+Math.round(perHour).toLocaleString('en-IN');
+document.getElementById('rPerWeek').innerText='₹'+Math.round(perWeek).toLocaleString('en-IN');
+document.getElementById('rPerYear').innerText='₹'+Math.round(annualNet).toLocaleString('en-IN');
+document.getElementById('rSavings').innerText='₹'+Math.round(pfMonthly*12*2+gratuity).toLocaleString('en-IN');
+document.getElementById('rEffTax').innerText=((taxAnnual/grossAnnual)*100).toFixed(1)+'%';
+document.getElementById('rTakeHomePerc').innerText=((netMonthly/ctcMonthly)*100).toFixed(1)+'%';
+document.getElementById('newBox').classList.toggle('best',bestRegime==='NEW');
+document.getElementById('oldBox').classList.toggle('best',bestRegime==='OLD');
+}
+function clearAll(){
+if(confirm('Clear all data?')){
+document.querySelectorAll('input[type=number],input[type=text]').forEach(e=>e.value='');
+document.getElementById('ctcMonthly').value=80000;
+document.getElementById('basic').value=40;
+document.getElementById('hraPercent').value=50;
+document.getElementById('convey').value=1600;
+document.getElementById('medical').value=1250;
+document.getElementById('pt').value=200;
+document.getElementById('c80').value=150000;
+document.getElementById('d80').value=25000;
+document.getElementById('hraExempt').value=120000;
+document.getElementById('workDays').value=30;
+document.getElementById('workHours').value=8;
+render();
+toast('Cleared Successfully!');
+}
+}
+function copySalary(){const txt=`Gross: ${document.getElementById('rGross').innerText} | Net: ${document.getElementById('rNet').innerText} | TDS: ${document.getElementById('rTdsMonth').innerText}`;navigator.clipboard.writeText(txt);toast('Copied!');}
+function downloadPDF(){const card=document.getElementById('salaryCard');html2canvas(card,{scale:2}).then(canvas=>{const img=canvas.toDataURL('image/png');const {jsPDF}=window.jspdf;const pdf=new jsPDF('p','mm','a4');const w=pdf.internal.pageSize.getWidth()-20;const h=canvas.height*w/canvas.width;pdf.addImage(img,'PNG',10,10,w,h);pdf.save(`Salary-Slip-${Date.now()}.pdf`);toast('PDF Downloaded!');});}
+render();
+</script>
+</body>
+</html>
