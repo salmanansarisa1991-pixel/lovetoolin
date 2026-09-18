@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Resume Maker PRO - Free ATS Resume Builder Online</title>
+<meta name="description" content="Free Job Resume Maker - 2 minute me ATS friendly professional resume banao, photo ke sath PDF download karo.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#f8fafc;color:#0f172a;line-height:1.7}
+.article{max-width:1200px;margin:15px auto;background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.06)}
+.article h1{font-size:26px;color:#0f172a}
+.article h2{font-size:18px;margin-top:18px;color:#2563eb}
+.article p,.article li{font-size:15px;color:#334155;margin-top:6px}
+.article ul{margin-left:18px}
+.container{max-width:1200px;margin:15px auto;display:grid;grid-template-columns:1fr 1fr;gap:15px;padding:0 10px}
+@media(max-width:900px){.container{grid-template-columns:1fr}}
+.card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.08)}
+.card h3{margin-bottom:12px;color:#0f172a;border-left:4px solid #2563eb;padding-left:8px}
+input,textarea{width:100%;padding:10px;margin:6px 0 12px 0;border:1px solid #cbd5e1;border-radius:8px;font-size:14px}
+textarea{resize:vertical;min-height:60px}
+.btn{padding:11px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:700;margin:5px 3px;font-size:14px}
+.btn-blue{background:#2563eb;color:#fff}.btn-green{background:#16a34a;color:#fff}.btn-red{background:#ef4444;color:#fff}
+#resumePreview{background:#fff;color:#000;padding:25px;border:1px solid #e2e8f0;min-height:750px}
+#resumePreview h1{font-size:24px}#resumePreview h2{font-size:13px;color:#2563eb;margin-top:14px;border-bottom:1px solid #e2e8f0;padding-bottom:3px;text-transform:uppercase;letter-spacing:1px}
+#resumePreview p{font-size:13px;line-height:1.6}
+.photo{width:90px;height:90px;border-radius:50%;object-fit:cover;float:right;border:2px solid #2563eb}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:10px 18px;border-radius:30px;font-size:13px;display:none;z-index:999}
+.faq{background:#fff;max-width:1200px;margin:15px auto;padding:20px;border-radius:12px}
+.faq h2{font-size:18px;margin-bottom:10px}
+.faq details{margin:8px 0;background:#f1f5f9;padding:10px;border-radius:8px}
+.faq summary{font-weight:600;cursor:pointer}
+</style>
+</head>
+<body>
+
+<!-- ARTICLE SECTION -->
+<div class="article">
+<h1>Job Resume Maker PRO - Free ATS Resume Builder online</h1>
+<p>Aaj ke competitive time me ek accha resume hi aapki pehli pehchan hai. Agar aap fresher ho, student ho ya experienced, ek professional ATS friendly resume aapko dusro se alag banata hai. Hamara <strong>Job Resume Maker PRO Tool</strong> aapko bina kisi fees ke 2 minute me ek perfect resume bana kar deta hai.</p>
+<h2>Is Tool Ki Khaasiyat Kya Hai?</h2>
+<ul>
+<li><strong>100% Free & No Watermark:</strong> Koi paisa nahi, koi watermark nahi.</li>
+<li><strong>Photo Wala Resume:</strong> Aap apni photo laga sakte ho jo private jobs me bahut zaruri hai.</li>
+<li><strong>ATS Friendly Design:</strong> Ye design company ke software me easily select ho jata hai.</li>
+<li><strong>Hobby & Skills Section:</strong> Aap apni hobby jaise Cricket, Music alag se add kar sakte ho.</li>
+<li><strong>Direct PDF Download:</strong> Ek click me high quality PDF, jisko aap WhatsApp, Email pe bhej sakte ho.</li>
+</ul>
+<h2>Resume Kaise Banaye?</h2>
+<p>1. Left side me apna Naam, Mobile, Email, Education, Skills, Experience aur Hobby bhare.<br>2. Right side me Live Preview dekhe.<br>3. Photo upload kare.<br>4. Copy ya PDF Download button pe click kare. Bas ho gaya!</p>
+<p>Ye tool specially Jabalpur, MP aur pure India ke students ke liye banaya gaya hai jo bina computer shop pe jaye ghar se hi resume banana chahte hai.</p>
+</div>
+
+<!-- TOOL SECTION -->
+<div id="toast"></div>
+<div class="container">
+<div class="card">
+<h3>Apni Details Bharo</h3>
+<input type="text" id="fullName" placeholder="Pura Naam - ex: Rahul Patidar" oninput="updateResume()">
+<input type="text" id="jobTitle" placeholder="Job Title - ex: Web Developer" oninput="updateResume()">
+<input type="text" id="phone" placeholder="Mobile No." oninput="updateResume()">
+<input type="text" id="email" placeholder="Email ID" oninput="updateResume()">
+<input type="text" id="address" placeholder="Address - Jabalpur, MP" oninput="updateResume()">
+<input type="file" id="photoInput" accept="image/*">
+<textarea id="objective" oninput="updateResume()">Fresher with strong knowledge and hardworking nature. Seeking a job opportunity where I can use my skills.</textarea>
+<textarea id="education" oninput="updateResume()">BCA - Rani Durgavati University, Jabalpur (2022-2025) - 75%
+12th - MP Board (2022) - 82%</textarea>
+<textarea id="skills" oninput="updateResume()">HTML, CSS, JavaScript, MS Office, Typing</textarea>
+<textarea id="experience" oninput="updateResume()">Fresher - No Experience / 6 Month Internship at Computer Center</textarea>
+<textarea id="hobby" oninput="updateResume()">Cricket Khelna, Music Sunna, Travelling</textarea>
+<div style="margin-top:12px">
+<button class="btn btn-blue" onclick="copyResume()">📋 Copy Text</button>
+<button class="btn btn-green" id="downloadBtn" onclick="downloadPDF()">⬇️ PDF Download</button>
+<button class="btn btn-red" onclick="clearAll()">🗑️ Clear All</button>
+</div>
+</div>
+
+<div class="card">
+<h3>Live Preview</h3>
+<div id="resumePreview">
+<img id="previewPhoto" class="photo" style="display:none">
+<h1 id="pName">Rahul Patidar</h1>
+<p id="pTitle" style="color:#475569;font-weight:600">Web Developer</p>
+<p id="pContact" style="font-size:12px;margin-top:4px;color:#475569"></p>
+<h2>Objective</h2><p id="pObjective"></p>
+<h2>Education</h2><p id="pEducation" style="white-space:pre-line"></p>
+<h2>Skills</h2><p id="pSkills"></p>
+<h2>Experience</h2><p id="pExperience" style="white-space:pre-line"></p>
+<h2>Hobby</h2><p id="pHobby"></p>
+</div>
+</div>
+</div>
+
+<!-- FAQ SECTION FOR SEO -->
+<div class="faq">
+<h2>FAQ - Resume Maker Se Jude Sawal</h2>
+<details><summary>Kya ye resume maker free hai?</summary><p>Haan, ye 100% free hai, koi charge nahi hai aur PDF par koi watermark bhi nahi aayega.</p></details>
+<details><summary>Kya isme photo wala resume banta hai?</summary><p>Haan, aap apni passport size photo upload kar sakte ho, jo private company jobs ke liye best hai.</p></details>
+<details><summary>Kya ye ATS friendly hai?</summary><p>Haan, iska design ATS software friendly hai jisse aapka resume company me reject nahi hota.</p></details>
+<details><summary>Hobby kyu zaruri hai?</summary><p>Company aapki hobby se aapke nature ko samajhti hai, isliye humne Hobby ka alag section diya hai.</p></details>
+</div>
+
+<script>
+let photoBase64="";
+document.getElementById('photoInput').addEventListener('change',function(e){
+ const r=new FileReader();
+ r.onload=function(ev){photoBase64=ev.target.result;document.getElementById('previewPhoto').src=photoBase64;document.getElementById('previewPhoto').style.display='block';}
+ r.readAsDataURL(e.target.files[0]);
+});
+function showToast(msg){const t=document.getElementById('toast');t.innerText=msg;t.style.display='block';setTimeout(()=>t.style.display='none',3000);}
+function updateResume(){
+ document.getElementById('pName').innerText=document.getElementById('fullName').value||'Rahul Patidar';
+ document.getElementById('pTitle').innerText=document.getElementById('jobTitle').value||'Web Developer';
+ document.getElementById('pContact').innerText=`📞 ${document.getElementById('phone').value||'9876543210'} | ✉️ ${document.getElementById('email').value||'rahul@gmail.com'} | 📍 ${document.getElementById('address').value||'Jabalpur, MP'}`;
+ document.getElementById('pObjective').innerText=document.getElementById('objective').value;
+ document.getElementById('pEducation').innerText=document.getElementById('education').value;
+ document.getElementById('pSkills').innerText=document.getElementById('skills').value;
+ document.getElementById('pExperience').innerText=document.getElementById('experience').value;
+ document.getElementById('pHobby').innerText=document.getElementById('hobby').value;
+}
+updateResume();
+function copyResume(){navigator.clipboard.writeText(document.getElementById('resumePreview').innerText);showToast('✅ Text Copy Ho Gaya!');}
+async function downloadPDF(){
+ const btn=document.getElementById('downloadBtn');btn.innerText='⏳ Downloading...';btn.disabled=true;showToast('📥 PDF Download Ho Raha Hai...');
+ const {jsPDF}=window.jspdf;const element=document.getElementById('resumePreview');const canvas=await html2canvas(element,{scale:2});const imgData=canvas.toDataURL('image/png');const pdf=new jsPDF('p','mm','a4');const pdfW=pdf.internal.pageSize.getWidth();const pdfH=(canvas.height*pdfW)/canvas.width;pdf.addImage(imgData,'PNG',0,0,pdfW,pdfH);pdf.save((document.getElementById('fullName').value||'My_Resume')+'.pdf');btn.innerText='⬇️ PDF Download';btn.disabled=false;showToast('✅ PDF Download Ho Gaya!');
+}
+function clearAll(){if(confirm('Sab clear karna hai?')){document.querySelectorAll('input[type=text], textarea').forEach(e=>e.value='');document.getElementById('previewPhoto').style.display='none';photoBase64='';updateResume();showToast('🗑️ Clear Ho Gaya');}}
+</script>
+</body>
+</html>
