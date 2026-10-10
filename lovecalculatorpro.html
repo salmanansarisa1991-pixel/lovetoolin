@@ -27,7 +27,7 @@ input{width:92%;padding:13px;border:2px solid #ffb3c1;border-radius:12px;margin:
 <input type="text" id="boy" placeholder="Ladke Ka Naam">
 <input type="text" id="girl" placeholder="Ladki Ka Naam">
 <input type="date" id="dob1">
-<input type="date" id="dob2">
+
 
 <button class="btn btn-main" onclick="calculateLove()">❤️ Calculate Love %</button>
 <button class="btn btn-clear" id="clearBtn" onclick="clearAll()">🗑️ Clear Data</button>
@@ -56,7 +56,7 @@ function calculateLove(){
  let b=document.getElementById("boy").value.trim();
  let g=document.getElementById("girl").value.trim();
  if(!b||!g){alert("Bhai Dono Naam Daal!");return;}
- let str=(b+g+document.getElementById("dob1").value+document.getElementById("dob2").value).toLowerCase();
+ let str=(b+g+document.getElementById("dob1").value).toLowerCase()
  let sum=0; for(let i=0;i<str.length;i++){sum+=str.charCodeAt(i);}
  let love = 65 + (sum % 33);
  let trust = 60 + ((sum*2) % 35);
